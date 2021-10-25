@@ -1,0 +1,36 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "baseUrl": ".",
+        "rootDir": "src",
+        "module": "CommonJS",
+        "target": "ES5",
+        "lib": [
+            "ESNext",
+        ],
+        "moduleResolution": "Node",
+        "sourceMap": true,
+        "declaration": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": true,
+        "suppressImplicitAnyIndexErrors": true,
+        "skipLibCheck": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "types": [
+            "node",
+        ],
+    },
+    "include": [
+        "src"
+    ],
+    "exclude": [
+        "**/__mocks__/*",
+        "**/__tests__/*",
+        "**/templates/*",
+        "node_modules",
+        "**/*.test.ts",
+        "**/*.spec.ts",
+        "dist"
+    ]
+}
