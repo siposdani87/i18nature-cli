@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+'use strict';
+
+// eslint-disable-next-line
+require = require('esm')(module /*, options*/);
+
+// eslint-disable-next-line
+const cli = require('../dist').default;
+cli(process.argv);
