@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var fs_1 = __importDefault(require("fs"));
-var wait_1 = __importDefault(require("wait"));
 var util_1 = require("./util");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var taskList_1, projectConfig, taskList;
@@ -69,7 +68,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                 content = fs_1.default.readFileSync(fileInfo.path, 'utf8');
                                 _d.label = 1;
                             case 1:
-                                _d.trys.push([1, 4, , 5]);
+                                _d.trys.push([1, 3, , 4]);
                                 return [4 /*yield*/, axios_1.default.post("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/upload", {
                                         translation_file: translationFile,
                                         locale: fileInfo.locale,
@@ -82,14 +81,11 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                             case 2:
                                 response = _d.sent();
                                 translationFile.id = (_b = response.data.translation_file_id) !== null && _b !== void 0 ? _b : translationFile.id;
-                                return [4 /*yield*/, (0, wait_1.default)(2000)];
+                                return [3 /*break*/, 4];
                             case 3:
-                                _d.sent();
-                                return [3 /*break*/, 5];
-                            case 4:
                                 error_1 = _d.sent();
                                 return [2 /*return*/, Promise.reject(new Error((_c = error_1.response.data.message) !== null && _c !== void 0 ? _c : error_1.message))];
-                            case 5: return [2 /*return*/];
+                            case 4: return [2 /*return*/];
                         }
                     });
                 }); });

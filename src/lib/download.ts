@@ -1,6 +1,5 @@
 import axios from 'axios';
 import fs from 'fs';
-import wait from 'wait';
 import { Options } from './model';
 import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, runTasks } from './util';
 
@@ -33,7 +32,6 @@ export default async (options: Options): Promise<void> => {
                 },
             });
             fs.writeFileSync(fileInfo.path, response.data.content);
-            await wait(2000);
         } catch (error: any) {
             return Promise.reject(new Error(error.response.data.message ?? error.message));
         }
