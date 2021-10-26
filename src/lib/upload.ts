@@ -41,7 +41,7 @@ export default async (options: Options): Promise<void> => {
     });
 
     taskList.push({
-        title: `Modify config file: ${options.configFilePath}`,
+        title: `Modified config file: ${options.configFilePath}`,
         task: async () => {
             await saveProjectConfig(options.configFilePath, projectConfig);
         }

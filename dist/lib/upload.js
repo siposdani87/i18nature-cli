@@ -90,7 +90,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                     });
                 }); });
                 taskList.push({
-                    title: "Modify config file: " + options.configFilePath,
+                    title: "Modified config file: " + options.configFilePath,
                     task: function () { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
