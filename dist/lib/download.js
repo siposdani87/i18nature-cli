@@ -41,7 +41,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var fs_1 = __importDefault(require("fs"));
-var wait_1 = __importDefault(require("wait"));
 var util_1 = require("./util");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var taskList_1, projectConfig, taskList;
@@ -66,7 +65,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                     return __generator(this, function (_c) {
                         switch (_c.label) {
                             case 0:
-                                _c.trys.push([0, 3, , 4]);
+                                _c.trys.push([0, 2, , 3]);
                                 return [4 /*yield*/, axios_1.default.post("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/download", {
                                         locale: fileInfo.locale,
                                     }, {
@@ -77,14 +76,11 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                             case 1:
                                 response = _c.sent();
                                 fs_1.default.writeFileSync(fileInfo.path, response.data.content);
-                                return [4 /*yield*/, (0, wait_1.default)(2000)];
+                                return [3 /*break*/, 3];
                             case 2:
-                                _c.sent();
-                                return [3 /*break*/, 4];
-                            case 3:
                                 error_1 = _c.sent();
                                 return [2 /*return*/, Promise.reject(new Error((_b = error_1.response.data.message) !== null && _b !== void 0 ? _b : error_1.message))];
-                            case 4: return [2 /*return*/];
+                            case 3: return [2 /*return*/];
                         }
                     });
                 }); });

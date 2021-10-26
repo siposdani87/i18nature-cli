@@ -1,6 +1,5 @@
 import axios from 'axios';
 import fs from 'fs';
-import wait from 'wait';
 import { Options } from './model';
 import { getProjectConfig, getUploadTasksFromTranslationFiles, logHeader, runTasks, saveProjectConfig } from './util';
 
@@ -36,7 +35,6 @@ export default async (options: Options): Promise<void> => {
                 },
             });
             translationFile.id = response.data.translation_file_id ?? translationFile.id;
-            await wait(2000);
         } catch (error: any) {
             return Promise.reject(new Error(error.response.data.message ?? error.message));
         }
