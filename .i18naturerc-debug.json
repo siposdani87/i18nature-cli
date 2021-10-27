@@ -12,7 +12,8 @@
                 "hu-HU"
             ],
             "default_locale": "en-GB",
-            "directory": "example/locales"
+            "directory": "example/locales",
+            "id": "5MdUAgtDHR0o3UdPtCxe"
         },
         {
             "name": "Common",
@@ -23,7 +24,8 @@
                 "hu-HU"
             ],
             "default_locale": "en-GB",
-            "directory": "example/i18n/%language/"
+            "directory": "example/i18n/%language/",
+            "id": "JJmrZNWC4cQVDXq3dDwP"
         }
     ]
 }

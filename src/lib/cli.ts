@@ -4,9 +4,10 @@ import inquirer from 'inquirer';
 import path from 'path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
+import { BASE_URL, CURRENT_WORK_DIR, DEBUG_BASE_URL, DEBUG_FILENAME, DEFAULT_API_KEY, FILENAME } from './config';
 import download from './download';
 import init from './init';
-import { Action, BASE_URL, CURRENT_WORK_DIR, DEBUG_BASE_URL, DEBUG_FILENAME, DEFAULT_API_KEY, FILENAME, Options } from './model';
+import { Action, Options } from './model';
 import upload from './upload';
 
 const actionFromString = (action: string): Action => {

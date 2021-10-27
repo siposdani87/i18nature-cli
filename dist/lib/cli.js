@@ -56,6 +56,7 @@ var inquirer_1 = __importDefault(require("inquirer"));
 var path_1 = __importDefault(require("path"));
 var yargs_1 = __importDefault(require("yargs"));
 var helpers_1 = require("yargs/helpers");
+var config_1 = require("./config");
 var download_1 = __importDefault(require("./download"));
 var init_1 = __importDefault(require("./init"));
 var model_1 = require("./model");
@@ -83,7 +84,7 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                     return yargs
                         .positional('project_api_key', {
                         describe: 'project to bind on',
-                        default: model_1.DEFAULT_API_KEY,
+                        default: config_1.DEFAULT_API_KEY,
                     });
                 }, function (argv) {
                     if (argv.verbose) {
@@ -130,8 +131,8 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                 }).argv];
             case 1:
                 argv = _a.sent();
-                configFileName = argv.debug ? model_1.DEBUG_FILENAME : model_1.FILENAME;
-                configFilePath = path_1.default.join(model_1.CURRENT_WORK_DIR, configFileName);
+                configFileName = argv.debug ? config_1.DEBUG_FILENAME : config_1.FILENAME;
+                configFilePath = path_1.default.join(config_1.CURRENT_WORK_DIR, configFileName);
                 return [2 /*return*/, {
                         projectApiKey: argv.project_api_key,
                         skipPrompts: argv.yes || false,
@@ -156,7 +157,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                     return [2 /*return*/, options];
                 }
                 questions = [];
-                isDefaultApiKey = options.projectApiKey === model_1.DEFAULT_API_KEY;
+                isDefaultApiKey = options.projectApiKey === config_1.DEFAULT_API_KEY;
                 if (options.action === model_1.Action.INIT && options.existsProjectConfigFile) {
                     questions.push({
                         type: 'confirm',
@@ -190,7 +191,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                 return [4 /*yield*/, inquirer_1.default.prompt(questions)];
             case 1:
                 answers = _a.sent();
-                return [2 /*return*/, __assign(__assign({}, options), { projectApiKey: options.projectApiKey !== model_1.DEFAULT_API_KEY ? options.projectApiKey : answers.project_api_key, overwrite: answers.overwrite || !options.existsProjectConfigFile, directory: options.directory || answers.directory })];
+                return [2 /*return*/, __assign(__assign({}, options), { projectApiKey: options.projectApiKey !== config_1.DEFAULT_API_KEY ? options.projectApiKey : answers.project_api_key, overwrite: answers.overwrite || !options.existsProjectConfigFile, directory: options.directory || answers.directory })];
         }
     });
 }); };
@@ -199,7 +200,7 @@ var actionHandler = function (options) { return __awaiter(void 0, void 0, void 0
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                axios_1.default.defaults.baseURL = options.debug ? model_1.DEBUG_BASE_URL : model_1.BASE_URL;
+                axios_1.default.defaults.baseURL = options.debug ? config_1.DEBUG_BASE_URL : config_1.BASE_URL;
                 _a = options.action;
                 switch (_a) {
                     case model_1.Action.INIT: return [3 /*break*/, 1];
