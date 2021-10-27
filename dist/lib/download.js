@@ -66,10 +66,9 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                         switch (_c.label) {
                             case 0:
                                 _c.trys.push([0, 2, , 3]);
-                                return [4 /*yield*/, axios_1.default.post("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/download", {
-                                        locale: fileInfo.locale,
-                                    }, {
+                                return [4 /*yield*/, axios_1.default.get("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/download", {
                                         params: {
+                                            locale: fileInfo.locale,
                                             api_key: projectConfig.project_api_key,
                                         },
                                     })];

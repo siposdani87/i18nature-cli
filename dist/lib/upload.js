@@ -71,10 +71,10 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                 _d.trys.push([1, 3, , 4]);
                                 return [4 /*yield*/, axios_1.default.post("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/upload", {
                                         translation_file: translationFile,
-                                        locale: fileInfo.locale,
                                         content: content,
                                     }, {
                                         params: {
+                                            locale: fileInfo.locale,
                                             api_key: projectConfig.project_api_key,
                                         },
                                     })];

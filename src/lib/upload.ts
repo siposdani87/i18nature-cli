@@ -27,10 +27,10 @@ export default async (options: Options): Promise<void> => {
         try {
             const response = await axios.post<UploadResponse>(`/api/translation-files/${translationFile.id ?? null}/upload`, {
                 translation_file: translationFile,
-                locale: fileInfo.locale,
                 content,
             }, {
                 params: {
+                    locale: fileInfo.locale,
                     api_key: projectConfig.project_api_key,
                 },
             });
