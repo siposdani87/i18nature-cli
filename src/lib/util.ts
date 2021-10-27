@@ -3,7 +3,8 @@ import fs from 'fs';
 import glob from 'glob';
 import Listr from 'listr';
 import path from 'path';
-import { CURRENT_WORK_DIR, FileInfo, GREEN_COLOR, ProjectConfig, TranslationFile } from './model';
+import { CURRENT_WORK_DIR, GREEN_COLOR } from './config';
+import { FileInfo, ProjectConfig, TranslationFile } from './model';
 
 const _getGlobPatterns = (translatioFile: TranslationFile): string[] => {
     const directory = translatioFile.directory ?? '';

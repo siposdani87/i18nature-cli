@@ -45,12 +45,12 @@ var fs_1 = __importDefault(require("fs"));
 var glob_1 = __importDefault(require("glob"));
 var listr_1 = __importDefault(require("listr"));
 var path_1 = __importDefault(require("path"));
-var model_1 = require("./model");
+var config_1 = require("./config");
 var _getGlobPatterns = function (translatioFile) {
     var _a;
     var directory = (_a = translatioFile.directory) !== null && _a !== void 0 ? _a : '';
     var file = translatioFile.filename + "." + translatioFile.extension;
-    var filePattern = path_1.default.join(model_1.CURRENT_WORK_DIR, directory, file);
+    var filePattern = path_1.default.join(config_1.CURRENT_WORK_DIR, directory, file);
     var globPattern = _resolvePathPattern(filePattern, '*');
     return [filePattern, globPattern];
 };
@@ -183,7 +183,7 @@ var saveProjectConfig = function (configFilePath, projectConfig) { return __awai
 }); };
 exports.saveProjectConfig = saveProjectConfig;
 var logHeader = function (title) {
-    console.log(chalk_1.default.hex(model_1.GREEN_COLOR).bold(title));
+    console.log(chalk_1.default.hex(config_1.GREEN_COLOR).bold(title));
 };
 exports.logHeader = logHeader;
 var logError = function (msg) {
