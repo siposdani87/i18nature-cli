@@ -7,17 +7,25 @@
             "filename": "base_%locale",
             "extension": "yml",
             "wrapper_key": "%language",
-            "locales": ["en-GB", "hu-HU"],
+            "locales": [
+                "en-GB",
+                "hu-HU"
+            ],
             "default_locale": "en-GB",
-            "directory": "example/locales"
+            "directory": "example/locales",
+            "id": "5MdUAgtDHR0o3UdPtCxe"
         },
         {
             "name": "Common",
             "filename": "common",
             "extension": "json",
-            "locales": ["en-GB", "hu-HU"],
+            "locales": [
+                "en-GB",
+                "hu-HU"
+            ],
             "default_locale": "en-GB",
-            "directory": "example/i18n/%language/"
+            "directory": "example/i18n/%language/",
+            "id": "JJmrZNWC4cQVDXq3dDwP"
         }
     ]
 }

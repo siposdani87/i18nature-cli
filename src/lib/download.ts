@@ -24,10 +24,9 @@ export default async (options: Options): Promise<void> => {
     const projectConfig = getProjectConfig(options.configFilePath);
     const taskList = getDownloadTasksFromTranslationFiles(projectConfig.translation_files, async (translationFile, fileInfo) => {
         try {
-            const response = await axios.post<DownloadResponse>(`/api/translation-files/${translationFile.id ?? null}/download`, {
-                locale: fileInfo.locale,
-            }, {
+            const response = await axios.get<DownloadResponse>(`/api/translation-files/${translationFile.id ?? null}/download`, {
                 params: {
+                    locale: fileInfo.locale,
                     api_key: projectConfig.project_api_key,
                 },
             });
