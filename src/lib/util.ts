@@ -3,7 +3,7 @@ import fs from 'fs';
 import glob from 'glob';
 import Listr from 'listr';
 import path from 'path';
-import { CURRENT_WORK_DIR, GREEN_COLOR } from './config';
+import { CURRENT_WORK_DIR, GREEN_COLOR, INDENT } from './config';
 import { FileInfo, ProjectConfig, TranslationFile } from './model';
 
 const _getGlobPatterns = (translatioFile: TranslationFile): string[] => {
@@ -131,7 +131,7 @@ export const runTasks = async (taskList: Listr.ListrTask<any>[]): Promise<void> 
 }
 
 export const saveProjectConfig = async (configFilePath: string, projectConfig: ProjectConfig): Promise<void> => {
-    fs.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, 4));
+    fs.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, INDENT));
 }
 
 export const logHeader = (title: string): void => {

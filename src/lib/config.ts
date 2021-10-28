@@ -8,3 +8,5 @@ export const DEBUG_BASE_URL = 'http://localhost';
 export const BASE_URL = 'https://app.i18nature.com';
 
 export const GREEN_COLOR = '#0A4414';
+
+export const INDENT = 2;

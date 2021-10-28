@@ -177,7 +177,7 @@ var runTasks = function (taskList) { return __awaiter(void 0, void 0, void 0, fu
 exports.runTasks = runTasks;
 var saveProjectConfig = function (configFilePath, projectConfig) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        fs_1.default.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, 4));
+        fs_1.default.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, config_1.INDENT));
         return [2 /*return*/];
     });
 }); };
