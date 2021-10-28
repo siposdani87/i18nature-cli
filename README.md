@@ -66,9 +66,9 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 
 | Property         | Type      | Description      |
 | ---------------- | --------- | ---------------- |
-| id **            | String    | uniq identifier from i18nature |
+| id **            | String    | uniq identifier of translation file from i18nature |
 | name *           | String    | your translation file short description |
-| filename *       | String    | filaname without extension |
+| filename *       | String    | filename without extension |
 | extension *      | String    | eg.: json, yml, yaml, arb, po, xml, strings, ini, properties |
 | locales *        | String[]  | list of locales like ['en-GB', 'hu-HU'] |
 | default_locale * | String    | default locale eg.: 'en-GB' |
@@ -76,6 +76,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 | directory *      | String    | relative path to translation files |
 
 **not required for first upload, but required for other upload and download
+
 *required properties
 
 ### Locale directory hierarchy
