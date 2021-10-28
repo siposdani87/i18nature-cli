@@ -166,7 +166,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                         default: false,
                     });
                 }
-                if (options.action === model_1.Action.INIT && isDefaultApiKey) {
+                if (options.action === model_1.Action.INIT) {
                     projectConfig = {
                         project_api_key: options.projectApiKey,
                     };
@@ -185,7 +185,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                         name: 'directory',
                         message: 'Relative path of translation files directory?',
                         default: 'example/locales',
-                        when: function (answers) { return answers.overwrite || isDefaultApiKey; },
+                        when: function (answers) { return answers.overwrite || !options.existsProjectConfigFile; },
                     });
                 }
                 return [4 /*yield*/, inquirer_1.default.prompt(questions)];

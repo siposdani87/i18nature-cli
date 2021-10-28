@@ -111,7 +111,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
         });
     }
 
-    if (options.action === Action.INIT && isDefaultApiKey) {
+    if (options.action === Action.INIT) {
         let projectConfig = {
             project_api_key: options.projectApiKey,
         };
@@ -131,7 +131,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             name: 'directory',
             message: 'Relative path of translation files directory?',
             default: 'example/locales',
-            when: (answers: any) => answers.overwrite || isDefaultApiKey,
+            when: (answers: any) => answers.overwrite || !options.existsProjectConfigFile,
         });
     }
 
