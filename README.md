@@ -4,7 +4,7 @@
 
 # I18Nature-CLI
 
-Command-line tool to init, upload and download translation files to I18Nature localization platform.
+Command-line tool to init, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
 
 ## Usage
 
@@ -56,7 +56,7 @@ for more information, find our website at https://i18nature.com
 
 ## Creating a config file from I18nature project
 
-When creating a config file, you may provide or generate a `api_key` of your project from I18Nature. With CLI you can initialize `.i18naturerc.json` config file. This file contains your list of your translation files. The translation file has many properties like (`id, name, filename, extension, locales, default_locale, wrapper_key, directory`). 
+When creating a config file, you may provide or generate a `api_key` of your project from [I18Nature](https://i18nature.com)). With CLI you can initialize `.i18naturerc.json` config file. This file contains your list of your translation files. The translation file has many properties like (`id, name, filename, extension, locales, default_locale, wrapper_key, directory`).
 
 🔴 **IMPORTANT**: You can use `%language` and `%locale` placeholder keys in `filename, wrapper_key, directory` properties.
 
