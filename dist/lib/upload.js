@@ -74,6 +74,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                         content: content,
                                     }, {
                                         params: {
+                                            overwrite: options.overwriteTranslations,
                                             locale: fileInfo.locale,
                                             api_key: projectConfig.project_api_key,
                                         },

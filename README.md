@@ -45,11 +45,12 @@ Commands:
   i18nature download                Download translation files.
 
 Options:
-  -h, --help     Show help                                             [boolean]
-      --version  Show version number                                   [boolean]
-  -v, --verbose  Run with verbose logging                              [boolean]
-  -y, --yes      Skip prompts                                          [boolean]
-      --debug    Debug mode                                            [boolean]
+  -h, --help                   Show help                               [boolean]
+      --version                Show version number                     [boolean]
+  -v, --verbose                Run with verbose logging                [boolean]
+  -y, --yes                    Skip prompts                            [boolean]
+      --debug                  Debug mode                              [boolean]
+      --overwriteTranslations  Overwrite translation file on upload    [boolean]
 
 for more information, find our website at https://i18nature.com
 ```

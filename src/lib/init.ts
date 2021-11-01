@@ -20,7 +20,7 @@ const _getProjectConfig = (projectApiKey: string, translationFiles: TranslationF
 export default async (options: Options): Promise<void> => {
     logHeader('INIT');
 
-    if (!options.overwrite) {
+    if (!options.overwriteConfigFile) {
         const taskList = [
             {
                 title: `Create config file: ${options.configFilePath}`,

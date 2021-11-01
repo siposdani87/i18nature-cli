@@ -128,6 +128,11 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                         description: 'Debug mode',
                         global: true,
                     },
+                    'overwriteTranslations': {
+                        type: 'boolean',
+                        description: 'Overwrite translation file on upload',
+                        global: true,
+                    },
                 }).argv];
             case 1:
                 argv = _a.sent();
@@ -138,7 +143,8 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                         skipPrompts: argv.yes || false,
                         verbose: argv.verbose || false,
                         debug: argv.debug || false,
-                        overwrite: false,
+                        overwriteConfigFile: false,
+                        overwriteTranslations: argv.overwriteTranslations || false,
                         configFileName: configFileName,
                         configFilePath: configFilePath,
                         directory: '',
@@ -161,7 +167,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                 if (options.action === model_1.Action.INIT && options.existsProjectConfigFile) {
                     questions.push({
                         type: 'confirm',
-                        name: 'overwrite',
+                        name: 'overwriteConfigFile',
                         message: "Overwrite existing " + options.configFileName + " file?",
                         default: false,
                     });
@@ -178,20 +184,20 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                         name: 'project_api_key',
                         message: 'Project API key?',
                         default: projectConfig.project_api_key,
-                        when: function (answers) { return answers.overwrite || isDefaultApiKey; },
+                        when: function (answers) { return answers.overwriteConfigFile || isDefaultApiKey; },
                     });
                     questions.push({
                         type: 'input',
                         name: 'directory',
                         message: 'Relative path of translation files directory?',
                         default: 'example/locales',
-                        when: function (answers) { return answers.overwrite || !options.existsProjectConfigFile; },
+                        when: function (answers) { return answers.overwriteConfigFile || !options.existsProjectConfigFile; },
                     });
                 }
                 return [4 /*yield*/, inquirer_1.default.prompt(questions)];
             case 1:
                 answers = _a.sent();
-                return [2 /*return*/, __assign(__assign({}, options), { projectApiKey: options.projectApiKey !== config_1.DEFAULT_API_KEY ? options.projectApiKey : answers.project_api_key, overwrite: answers.overwrite || !options.existsProjectConfigFile, directory: options.directory || answers.directory })];
+                return [2 /*return*/, __assign(__assign({}, options), { projectApiKey: options.projectApiKey !== config_1.DEFAULT_API_KEY ? options.projectApiKey : answers.project_api_key, overwriteConfigFile: answers.overwriteConfigFile || !options.existsProjectConfigFile, directory: options.directory || answers.directory })];
         }
     });
 }); };

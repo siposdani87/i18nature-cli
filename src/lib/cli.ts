@@ -75,6 +75,11 @@ const parseArgumentsIntoOptions = async (rawArgs: string[]): Promise<Options> =>
                 description: 'Debug mode',
                 global: true,
             },
+            'overwriteTranslations': {
+                type: 'boolean',
+                description: 'Overwrite translation file on upload',
+                global: true,
+            },
         }).argv;
 
     const configFileName = argv.debug ? DEBUG_FILENAME : FILENAME;
@@ -85,7 +90,8 @@ const parseArgumentsIntoOptions = async (rawArgs: string[]): Promise<Options> =>
         skipPrompts: argv.yes || false,
         verbose: argv.verbose || false,
         debug: argv.debug || false,
-        overwrite: false,
+        overwriteConfigFile: false,
+        overwriteTranslations: argv.overwriteTranslations || false,
         configFileName,
         configFilePath,
         directory: '',
@@ -105,7 +111,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
     if (options.action === Action.INIT && options.existsProjectConfigFile) {
         questions.push({
             type: 'confirm',
-            name: 'overwrite',
+            name: 'overwriteConfigFile',
             message: `Overwrite existing ${options.configFileName} file?`,
             default: false,
         });
@@ -123,7 +129,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             name: 'project_api_key',
             message: 'Project API key?',
             default: projectConfig.project_api_key,
-            when: (answers: any) => answers.overwrite || isDefaultApiKey,
+            when: (answers: any) => answers.overwriteConfigFile || isDefaultApiKey,
         });
 
         questions.push({
@@ -131,7 +137,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             name: 'directory',
             message: 'Relative path of translation files directory?',
             default: 'example/locales',
-            when: (answers: any) => answers.overwrite || !options.existsProjectConfigFile,
+            when: (answers: any) => answers.overwriteConfigFile || !options.existsProjectConfigFile,
         });
     }
 
@@ -139,7 +145,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
     return {
         ...options,
         projectApiKey: options.projectApiKey !== DEFAULT_API_KEY ? options.projectApiKey : answers.project_api_key,
-        overwrite: answers.overwrite || !options.existsProjectConfigFile,
+        overwriteConfigFile: answers.overwriteConfigFile || !options.existsProjectConfigFile,
         directory: options.directory || answers.directory,
     };
 };

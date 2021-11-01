@@ -8,7 +8,8 @@ export interface Options {
     projectApiKey: string;
     skipPrompts: boolean;
     verbose: boolean;
-    overwrite: boolean;
+    overwriteConfigFile: boolean;
+    overwriteTranslations: boolean;
     debug: boolean;
     action: Action;
     directory: string;

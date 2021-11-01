@@ -67,7 +67,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
         switch (_a.label) {
             case 0:
                 (0, util_1.logHeader)('INIT');
-                if (!!options.overwrite) return [3 /*break*/, 2];
+                if (!!options.overwriteConfigFile) return [3 /*break*/, 2];
                 taskList_1 = [
                     {
                         title: "Create config file: " + options.configFilePath,
