@@ -30,6 +30,7 @@ export default async (options: Options): Promise<void> => {
                 content,
             }, {
                 params: {
+                    overwrite: options.overwriteTranslations,
                     locale: fileInfo.locale,
                     api_key: projectConfig.project_api_key,
                 },
