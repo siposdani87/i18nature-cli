@@ -36,8 +36,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "cli",
-    "i18nature-cli"
+    "i18nature",
+    "i18nature-cli",
+    "i18n",
+    "l10n",
+    "translation",
+    "localization",
+    "internationalization"
   ],
   "author": "Dániel Sipos <siposdani87@gmail.com>",
   "license": "ISC",

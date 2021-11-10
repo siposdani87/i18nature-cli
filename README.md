@@ -32,7 +32,7 @@ npm install -g i18nature-cli
 i18nature --help
 ```
 
-## Command line arguments:
+## Command line arguments
 
 ```
 Command-line tool of I18Nature localization tool.
