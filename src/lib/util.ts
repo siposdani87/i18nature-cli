@@ -4,7 +4,7 @@ import glob from 'glob';
 import Listr from 'listr';
 import path from 'path';
 import { CURRENT_WORK_DIR, GREEN_COLOR, INDENT } from './config';
-import { FileInfo, ProjectConfig, TranslationFile } from './model';
+import { FileInfo, ProjectConfig, TranslationFile, Options } from './model';
 
 const _getGlobPatterns = (translatioFile: TranslationFile): string[] => {
     const directory = translatioFile.directory ?? '';
@@ -132,6 +132,17 @@ export const runTasks = async (taskList: Listr.ListrTask<any>[]): Promise<void> 
 
 export const saveProjectConfig = async (configFilePath: string, projectConfig: ProjectConfig): Promise<void> => {
     fs.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, INDENT));
+}
+
+export const missingConfigFile = async (options: Options): Promise<void> => {
+    const taskList = [
+        {
+            title: `Missing config file: ${options.configFilePath}`,
+            task: () => Promise.reject(new Error('Create config file or init project!')),
+        },
+    ];
+
+    return await runTasks(taskList);
 }
 
 export const logHeader = (title: string): void => {
