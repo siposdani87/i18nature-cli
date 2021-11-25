@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
 import { Options } from './model';
-import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, runTasks } from './util';
+import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, missingConfigFile, runTasks } from './util';
 
 interface DownloadResponse {
     content: string;
@@ -11,14 +11,7 @@ export default async (options: Options): Promise<void> => {
     logHeader('DOWNLOAD');
 
     if (!options.existsProjectConfigFile) {
-        const taskList = [
-            {
-                title: `Missing config file: ${options.configFilePath}`,
-                task: () => Promise.reject(new Error('Create config file or init project!')),
-            },
-        ];
-
-        return await runTasks(taskList);
+        return await missingConfigFile(options);
     }
 
     const projectConfig = getProjectConfig(options.configFilePath);
