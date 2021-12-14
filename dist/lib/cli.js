@@ -88,7 +88,7 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                     });
                 }, function (argv) {
                     if (argv.verbose) {
-                        console.info("create config file of: " + argv.project_api_key);
+                        console.info("create config file of: ".concat(argv.project_api_key));
                     }
                 })
                     .command('upload', 'Upload translation files.', function (yargs) {
@@ -168,7 +168,7 @@ var promptForMissingOptions = function (options) { return __awaiter(void 0, void
                     questions.push({
                         type: 'confirm',
                         name: 'overwriteConfigFile',
-                        message: "Overwrite existing " + options.configFileName + " file?",
+                        message: "Overwrite existing ".concat(options.configFileName, " file?"),
                         default: false,
                     });
                 }
