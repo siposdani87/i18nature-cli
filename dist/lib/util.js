@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logError = exports.logHeader = exports.saveProjectConfig = exports.runTasks = exports._getTasksFromTranslationFileData = exports.getDownloadTasksFromTranslationFiles = exports.getUploadTasksFromTranslationFiles = exports.getProjectConfig = exports.getDownloadFileInfosOfTranslationFile = exports.getUploadFileInfosOfTranslationFile = void 0;
+exports.logError = exports.logHeader = exports.missingConfigFile = exports.saveProjectConfig = exports.runTasks = exports._getTasksFromTranslationFileData = exports.getDownloadTasksFromTranslationFiles = exports.getUploadTasksFromTranslationFiles = exports.getProjectConfig = exports.getDownloadFileInfosOfTranslationFile = exports.getUploadFileInfosOfTranslationFile = void 0;
 var chalk_1 = __importDefault(require("chalk"));
 var fs_1 = __importDefault(require("fs"));
 var glob_1 = __importDefault(require("glob"));
@@ -49,7 +49,7 @@ var config_1 = require("./config");
 var _getGlobPatterns = function (translatioFile) {
     var _a;
     var directory = (_a = translatioFile.directory) !== null && _a !== void 0 ? _a : '';
-    var file = translatioFile.filename + "." + translatioFile.extension;
+    var file = "".concat(translatioFile.filename, ".").concat(translatioFile.extension);
     var filePattern = path_1.default.join(config_1.CURRENT_WORK_DIR, directory, file);
     var globPattern = _resolvePathPattern(filePattern, '*');
     return [filePattern, globPattern];
@@ -128,7 +128,7 @@ var _getTasksFromTranslationFileData = function (data) {
     data.translationFiles.forEach(function (translationFile) { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             taskList.push({
-                title: data.title + ": " + translationFile.name,
+                title: "".concat(data.title, ": ").concat(translationFile.name),
                 task: function () { return __awaiter(void 0, void 0, void 0, function () {
                     var subTaskList, fileInfos;
                     return __generator(this, function (_a) {
@@ -136,7 +136,7 @@ var _getTasksFromTranslationFileData = function (data) {
                         fileInfos = data.fileInfoCallback(translationFile);
                         fileInfos.forEach(function (fileInfo) {
                             subTaskList.push({
-                                title: data.subtitle + ": " + fileInfo.path,
+                                title: "".concat(data.subtitle, ": ").concat(fileInfo.path),
                                 task: function () { return __awaiter(void 0, void 0, void 0, function () {
                                     return __generator(this, function (_a) {
                                         switch (_a.label) {
@@ -182,6 +182,23 @@ var saveProjectConfig = function (configFilePath, projectConfig) { return __awai
     });
 }); };
 exports.saveProjectConfig = saveProjectConfig;
+var missingConfigFile = function (options) { return __awaiter(void 0, void 0, void 0, function () {
+    var taskList;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                taskList = [
+                    {
+                        title: "Missing config file: ".concat(options.configFilePath),
+                        task: function () { return Promise.reject(new Error('Create config file or init project!')); },
+                    },
+                ];
+                return [4 /*yield*/, (0, exports.runTasks)(taskList)];
+            case 1: return [2 /*return*/, _a.sent()];
+        }
+    });
+}); };
+exports.missingConfigFile = missingConfigFile;
 var logHeader = function (title) {
     console.log(chalk_1.default.hex(config_1.GREEN_COLOR).bold(title));
 };

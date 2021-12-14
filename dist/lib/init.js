@@ -70,7 +70,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                 if (!!options.overwriteConfigFile) return [3 /*break*/, 2];
                 taskList_1 = [
                     {
-                        title: "Create config file: " + options.configFilePath,
+                        title: "Create config file: ".concat(options.configFilePath),
                         task: function () { return Promise.reject(new Error('Config file overwrite is not allowed!')); },
                     },
                 ];
@@ -79,7 +79,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
             case 2:
                 taskList = [
                     {
-                        title: "Create config file: " + options.configFilePath,
+                        title: "Create config file: ".concat(options.configFilePath),
                         task: function () { return __awaiter(void 0, void 0, void 0, function () {
                             var response, translationFiles, projectConfig, error_1;
                             var _a;

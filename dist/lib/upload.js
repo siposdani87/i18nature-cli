@@ -43,19 +43,13 @@ var axios_1 = __importDefault(require("axios"));
 var fs_1 = __importDefault(require("fs"));
 var util_1 = require("./util");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
-    var taskList_1, projectConfig, taskList;
+    var projectConfig, taskList;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 (0, util_1.logHeader)('UPLOAD');
                 if (!!options.existsProjectConfigFile) return [3 /*break*/, 2];
-                taskList_1 = [
-                    {
-                        title: "Missing config file: " + options.configFilePath,
-                        task: function () { return Promise.reject(new Error('Create config file or init project!')); },
-                    },
-                ];
-                return [4 /*yield*/, (0, util_1.runTasks)(taskList_1)];
+                return [4 /*yield*/, (0, util_1.missingConfigFile)(options)];
             case 1: return [2 /*return*/, _a.sent()];
             case 2:
                 projectConfig = (0, util_1.getProjectConfig)(options.configFilePath);
@@ -69,7 +63,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                 _d.label = 1;
                             case 1:
                                 _d.trys.push([1, 3, , 4]);
-                                return [4 /*yield*/, axios_1.default.post("/api/translation-files/" + ((_a = translationFile.id) !== null && _a !== void 0 ? _a : null) + "/upload", {
+                                return [4 /*yield*/, axios_1.default.post("/api/translation-files/".concat((_a = translationFile.id) !== null && _a !== void 0 ? _a : null, "/upload"), {
                                         translation_file: translationFile,
                                         content: content,
                                     }, {
@@ -91,7 +85,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                     });
                 }); });
                 taskList.push({
-                    title: "Modified config file: " + options.configFilePath,
+                    title: "Modified config file: ".concat(options.configFilePath),
                     task: function () { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
