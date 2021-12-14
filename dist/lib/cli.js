@@ -130,7 +130,7 @@ var parseArgumentsIntoOptions = function (rawArgs) { return __awaiter(void 0, vo
                     },
                     'overwriteTranslations': {
                         type: 'boolean',
-                        description: 'Overwrite translation file on upload',
+                        description: 'Overwrite translation files on upload',
                         global: true,
                     },
                 }).argv];

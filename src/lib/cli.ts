@@ -77,7 +77,7 @@ const parseArgumentsIntoOptions = async (rawArgs: string[]): Promise<Options> =>
             },
             'overwriteTranslations': {
                 type: 'boolean',
-                description: 'Overwrite translation file on upload',
+                description: 'Overwrite translation files on upload',
                 global: true,
             },
         }).argv;
