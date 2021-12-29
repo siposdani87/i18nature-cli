@@ -50,7 +50,7 @@ Options:
   -v, --verbose                Run with verbose logging                [boolean]
   -y, --yes                    Skip prompts                            [boolean]
       --debug                  Debug mode                              [boolean]
-      --overwriteTranslations  Overwrite translation files on upload    [boolean]
+      --overwriteTranslations  Overwrite translation files on upload   [boolean]
 
 for more information, find our website at https://i18nature.com
 ```
@@ -86,7 +86,6 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 
 Example project strucure in this repository:
 ```
-/
     exammple/
       i18n/
         en/
