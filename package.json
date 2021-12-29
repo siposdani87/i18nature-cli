@@ -1,6 +1,6 @@
 {
   "name": "i18nature-cli",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Command-line tool to init, upload and download translation files to I18Nature localization platform.",
   "homepage": "https://github.com/siposdani87/i18nature-cli",
   "bugs": {
