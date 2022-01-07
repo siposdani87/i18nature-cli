@@ -15,7 +15,7 @@ export default async (options: Options): Promise<void> => {
     }
 
     const projectConfig = getProjectConfig(options.configFilePath);
-    const taskList = getUploadTasksFromTranslationFiles(projectConfig.translation_files, async (translationFile, fileInfo) => {
+    const taskList = getUploadTasksFromTranslationFiles(projectConfig.translation_files, async (translationFile, fileInfo): Promise<void> => {
         const content = fs.readFileSync(fileInfo.path, 'utf8');
         try {
             const response = await axios.post<UploadResponse>(`/api/translation-files/${translationFile.id ?? null}/upload`, {

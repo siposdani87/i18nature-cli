@@ -41,7 +41,7 @@ export default async (options: Options): Promise<void> => {
                             api_key: options.projectApiKey,
                         },
                     });
-                    const translationFiles = response.data.translation_files.map((translationFile) => {
+                    const translationFiles = response.data.translation_files.map((translationFile): TranslationFile => {
                         return {
                             ...translationFile,
                             directory: options.directory,

@@ -20,7 +20,7 @@ const _getLanguageFromLocale = (locale: string): string => {
 }
 
 const _getLocaleFrom = (filePath: string, filePattern: string, locales: string[]): string | undefined => {
-    return locales.find((locale) => {
+    return locales.find((locale): boolean => {
         const path = _resolvePathPattern(filePattern, locale);
         return path === filePath;
     });
@@ -36,7 +36,7 @@ export const getUploadFileInfosOfTranslationFile = (translationFile: Translation
     const files = glob.sync(globPattern);
     const results: FileInfo[] = [];
 
-    files.forEach((filePath) => {
+    files.forEach((filePath): void => {
         const locale = _getLocaleFrom(filePath, filePattern, translationFile.locales);
         if (locale) {
             results.push({
@@ -53,7 +53,7 @@ export const getDownloadFileInfosOfTranslationFile = (translationFile: Translati
     const [filePattern] = _getGlobPatterns(translationFile);
     const results: FileInfo[] = [];
 
-    translationFile.locales.forEach((locale) => {
+    translationFile.locales.forEach((locale): void => {
         const filePath = _resolvePathPattern(filePattern, locale);
         if (locale) {
             results.push({
@@ -100,7 +100,7 @@ export const _getTasksFromTranslationFileData = (data: {
 }): Listr.ListrTask<any>[] => {
     const taskList: Listr.ListrTask<any>[] = [];
 
-    data.translationFiles.forEach(async (translationFile) => {
+    data.translationFiles.forEach(async (translationFile): Promise<void> => {
         taskList.push({
             title: `${data.title}: ${translationFile.name}`,
             task: async () => {
@@ -125,7 +125,7 @@ export const _getTasksFromTranslationFileData = (data: {
 
 export const runTasks = async (taskList: Listr.ListrTask<any>[]): Promise<void> => {
     const tasks = new Listr(taskList);
-    await tasks.run().catch((reason) => {
+    await tasks.run().catch((reason): void => {
         console.log(reason);
     });
 }

@@ -165,7 +165,7 @@ const actionHandler = async (options: Options): Promise<void> => {
     }
 };
 
-export default async (args: string[]) => {
+export default async (args: string[]): Promise<void> => {
     let options = await parseArgumentsIntoOptions(args);
     options = await promptForMissingOptions(options);
     await actionHandler(options);
