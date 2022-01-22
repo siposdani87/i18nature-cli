@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
-import { Options } from './model';
-import { getProjectConfig, getUploadTasksFromTranslationFiles, logHeader, missingConfigFile, runTasks, saveProjectConfig } from './util';
+import { Options } from '../lib/model';
+import { getProjectConfig, getUploadTasksFromTranslationFiles, logHeader, missingConfigFile, runTasks, saveProjectConfig } from '../lib/util';
 
 interface UploadResponse {
     translation_file_id?: string;

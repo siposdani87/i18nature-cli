@@ -1,1 +1,1 @@
-export { default } from './lib/cli';
+export { default } from './cli';

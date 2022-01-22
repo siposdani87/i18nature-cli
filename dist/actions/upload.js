@@ -41,7 +41,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
 var fs_1 = __importDefault(require("fs"));
-var util_1 = require("./util");
+var util_1 = require("../lib/util");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var projectConfig, taskList;
     return __generator(this, function (_a) {

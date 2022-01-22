@@ -51,7 +51,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-var util_1 = require("./util");
+var util_1 = require("../lib/util");
 var _getProjectConfig = function (projectApiKey, translationFiles, version) {
     if (version === void 0) { version = 1; }
     var config = {
