@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { Options, ProjectConfig, TranslationFile } from './model';
-import { logHeader, runTasks, saveProjectConfig } from './util';
+import { Options, ProjectConfig, TranslationFile } from '../lib/model';
+import { logHeader, runTasks, saveProjectConfig } from '../lib/util';
 
 interface InitResponse {
     translation_files: TranslationFile[];

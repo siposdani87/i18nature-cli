@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fs from 'fs';
-import { Options } from './model';
-import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, missingConfigFile, runTasks } from './util';
+import { Options } from '../lib/model';
+import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, missingConfigFile, runTasks } from '../lib/util';
 
 interface DownloadResponse {
     content: string;

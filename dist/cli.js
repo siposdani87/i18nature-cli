@@ -56,11 +56,11 @@ var inquirer_1 = __importDefault(require("inquirer"));
 var path_1 = __importDefault(require("path"));
 var yargs_1 = __importDefault(require("yargs"));
 var helpers_1 = require("yargs/helpers");
-var config_1 = require("./config");
-var download_1 = __importDefault(require("./download"));
-var init_1 = __importDefault(require("./init"));
-var model_1 = require("./model");
-var upload_1 = __importDefault(require("./upload"));
+var config_1 = require("./lib/config");
+var download_1 = __importDefault(require("./actions/download"));
+var init_1 = __importDefault(require("./actions/init"));
+var model_1 = require("./lib/model");
+var upload_1 = __importDefault(require("./actions/upload"));
 var actionFromString = function (action) {
     switch (action) {
         case 'init':
