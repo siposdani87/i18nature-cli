@@ -55,7 +55,7 @@ Options:
 for more information, find our website at https://i18nature.com
 ```
 
-## Creating a config file for I18nature project
+## Creating a config file for I18Nature project
 
 When creating a config file, you may provide or generate a `api_key` of your project from [I18Nature](https://i18nature.com)). With CLI you can initialize `.i18naturerc.json` config file. This file contains your list of your translation files. The translation file has many properties like (`id, name, filename, extension, locales, default_locale, wrapper_key, directory`).
 
