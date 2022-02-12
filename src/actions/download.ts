@@ -1,7 +1,9 @@
 import axios from 'axios';
-import fs from 'fs';
+import { getProjectConfig, missingProjectConfigFile } from '../lib/projectConfig';
 import { Options } from '../lib/model';
-import { getDownloadTasksFromTranslationFiles, getProjectConfig, logHeader, missingConfigFile, runTasks } from '../lib/util';
+import { logHeader } from '../lib/log';
+import { getDownloadTasksFromTranslationFiles, runTasks } from '../lib/task';
+import { writeContent } from '../lib/fileInfo';
 
 interface DownloadResponse {
     content: string;
@@ -11,7 +13,7 @@ export default async (options: Options): Promise<void> => {
     logHeader('DOWNLOAD');
 
     if (!options.existsProjectConfigFile) {
-        return await missingConfigFile(options);
+        return await missingProjectConfigFile(options);
     }
 
     const projectConfig = getProjectConfig(options.configFilePath);
@@ -23,7 +25,7 @@ export default async (options: Options): Promise<void> => {
                     api_key: projectConfig.project_api_key,
                 },
             });
-            fs.writeFileSync(fileInfo.path, response.data.content);
+            writeContent(fileInfo.path, response.data.content);
         } catch (error: any) {
             return Promise.reject(new Error(error.response.data.message ?? error.message));
         }

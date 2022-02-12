@@ -39,86 +39,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logError = exports.logHeader = exports.missingConfigFile = exports.saveProjectConfig = exports.runTasks = exports._getTasksFromTranslationFileData = exports.getDownloadTasksFromTranslationFiles = exports.getUploadTasksFromTranslationFiles = exports.getProjectConfig = exports.getDownloadFileInfosOfTranslationFile = exports.getUploadFileInfosOfTranslationFile = void 0;
-var chalk_1 = __importDefault(require("chalk"));
-var fs_1 = __importDefault(require("fs"));
-var glob_1 = __importDefault(require("glob"));
+exports.runTasks = exports.getDownloadTasksFromTranslationFiles = exports.getUploadTasksFromTranslationFiles = void 0;
 var listr_1 = __importDefault(require("listr"));
-var path_1 = __importDefault(require("path"));
-var config_1 = require("./config");
-var _getGlobPatterns = function (translatioFile) {
-    var _a;
-    var directory = (_a = translatioFile.directory) !== null && _a !== void 0 ? _a : '';
-    var file = "".concat(translatioFile.filename, ".").concat(translatioFile.extension);
-    var filePattern = path_1.default.join(config_1.CURRENT_WORK_DIR, directory, file);
-    var globPattern = _resolvePathPattern(filePattern, '*');
-    return [filePattern, globPattern];
-};
-var _getLanguageFromLocale = function (locale) {
-    return locale.replace('_', '-').split('-', 2)[0];
-};
-var _getLocaleFrom = function (filePath, filePattern, locales) {
-    return locales.find(function (locale) {
-        var path = _resolvePathPattern(filePattern, locale);
-        return path === filePath;
-    });
-};
-var _resolvePathPattern = function (filePattern, locale) {
-    var language = locale === '*' ? '*' : _getLanguageFromLocale(locale);
-    return filePattern.replace('%language', language).replace('%locale', locale);
-};
-var getUploadFileInfosOfTranslationFile = function (translationFile) {
-    var _a = _getGlobPatterns(translationFile), filePattern = _a[0], globPattern = _a[1];
-    var files = glob_1.default.sync(globPattern);
-    var results = [];
-    files.forEach(function (filePath) {
-        var locale = _getLocaleFrom(filePath, filePattern, translationFile.locales);
-        if (locale) {
-            results.push({
-                path: filePath,
-                locale: locale,
-            });
-        }
-    });
-    return results;
-};
-exports.getUploadFileInfosOfTranslationFile = getUploadFileInfosOfTranslationFile;
-var getDownloadFileInfosOfTranslationFile = function (translationFile) {
-    var filePattern = _getGlobPatterns(translationFile)[0];
-    var results = [];
-    translationFile.locales.forEach(function (locale) {
-        var filePath = _resolvePathPattern(filePattern, locale);
-        if (locale) {
-            results.push({
-                path: filePath,
-                locale: locale,
-            });
-        }
-    });
-    return results;
-};
-exports.getDownloadFileInfosOfTranslationFile = getDownloadFileInfosOfTranslationFile;
-var getProjectConfig = function (configFilePath) {
-    var data = fs_1.default.readFileSync(configFilePath, 'utf8');
-    return JSON.parse(data);
-};
-exports.getProjectConfig = getProjectConfig;
+var fileInfo_1 = require("./fileInfo");
 var getUploadTasksFromTranslationFiles = function (translationFiles, taskCallback) {
-    return (0, exports._getTasksFromTranslationFileData)({
+    return _getTasksFromTranslationFileData({
         title: 'Upload translation file',
         subtitle: 'Upload data of',
         translationFiles: translationFiles,
-        fileInfoCallback: exports.getUploadFileInfosOfTranslationFile,
+        fileInfoCallback: fileInfo_1.getUploadFileInfosOfTranslationFile,
         taskCallback: taskCallback,
     });
 };
 exports.getUploadTasksFromTranslationFiles = getUploadTasksFromTranslationFiles;
 var getDownloadTasksFromTranslationFiles = function (translationFiles, taskCallback) {
-    return (0, exports._getTasksFromTranslationFileData)({
+    return _getTasksFromTranslationFileData({
         title: 'Download translation file',
         subtitle: 'Download data of',
         translationFiles: translationFiles,
-        fileInfoCallback: exports.getDownloadFileInfosOfTranslationFile,
+        fileInfoCallback: fileInfo_1.getDownloadFileInfosOfTranslationFile,
         taskCallback: taskCallback,
     });
 };
@@ -158,7 +97,6 @@ var _getTasksFromTranslationFileData = function (data) {
     }); });
     return taskList;
 };
-exports._getTasksFromTranslationFileData = _getTasksFromTranslationFileData;
 var runTasks = function (taskList) { return __awaiter(void 0, void 0, void 0, function () {
     var tasks;
     return __generator(this, function (_a) {
@@ -175,36 +113,4 @@ var runTasks = function (taskList) { return __awaiter(void 0, void 0, void 0, fu
     });
 }); };
 exports.runTasks = runTasks;
-var saveProjectConfig = function (configFilePath, projectConfig) { return __awaiter(void 0, void 0, void 0, function () {
-    return __generator(this, function (_a) {
-        fs_1.default.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, config_1.INDENT));
-        return [2 /*return*/];
-    });
-}); };
-exports.saveProjectConfig = saveProjectConfig;
-var missingConfigFile = function (options) { return __awaiter(void 0, void 0, void 0, function () {
-    var taskList;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                taskList = [
-                    {
-                        title: "Missing config file: ".concat(options.configFilePath),
-                        task: function () { return Promise.reject(new Error('Create config file or init project!')); },
-                    },
-                ];
-                return [4 /*yield*/, (0, exports.runTasks)(taskList)];
-            case 1: return [2 /*return*/, _a.sent()];
-        }
-    });
-}); };
-exports.missingConfigFile = missingConfigFile;
-var logHeader = function (title) {
-    console.log(chalk_1.default.hex(config_1.GREEN_COLOR).bold(title));
-};
-exports.logHeader = logHeader;
-var logError = function (msg) {
-    console.error(chalk_1.default.red.bold(msg));
-};
-exports.logError = logError;
-//# sourceMappingURL=util.js.map
+//# sourceMappingURL=task.js.map
