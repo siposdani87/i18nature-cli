@@ -11,31 +11,43 @@ const _getGlobPatterns = (translatioFile: TranslationFile): string[] => {
     const globPattern = _resolvePathPattern(filePattern, '*');
 
     return [filePattern, globPattern];
-}
+};
 
 const _getLanguageFromLocale = (locale: string): string => {
     return locale.replace('_', '-').split('-', 2)[0];
-}
+};
 
-const _getLocaleFrom = (filePath: string, filePattern: string, locales: string[]): string | undefined => {
+const _getLocaleFrom = (
+    filePath: string,
+    filePattern: string,
+    locales: string[],
+): string | undefined => {
     return locales.find((locale): boolean => {
         const path = _resolvePathPattern(filePattern, locale);
         return path === filePath;
     });
-}
+};
 
 const _resolvePathPattern = (filePattern: string, locale: string): string => {
     const language = locale === '*' ? '*' : _getLanguageFromLocale(locale);
-    return filePattern.replace('%language', language).replace('%locale', locale);
-}
+    return filePattern
+        .replace('%language', language)
+        .replace('%locale', locale);
+};
 
-export const getUploadFileInfosOfTranslationFile = (translationFile: TranslationFile): FileInfo[] => {
+export const getUploadFileInfosOfTranslationFile = (
+    translationFile: TranslationFile,
+): FileInfo[] => {
     const [filePattern, globPattern] = _getGlobPatterns(translationFile);
     const files = glob.sync(globPattern);
     const results: FileInfo[] = [];
 
     files.forEach((filePath): void => {
-        const locale = _getLocaleFrom(filePath, filePattern, translationFile.locales);
+        const locale = _getLocaleFrom(
+            filePath,
+            filePattern,
+            translationFile.locales,
+        );
         if (locale) {
             results.push({
                 path: filePath,
@@ -45,9 +57,11 @@ export const getUploadFileInfosOfTranslationFile = (translationFile: Translation
     });
 
     return results;
-}
+};
 
-export const getDownloadFileInfosOfTranslationFile = (translationFile: TranslationFile): FileInfo[] => {
+export const getDownloadFileInfosOfTranslationFile = (
+    translationFile: TranslationFile,
+): FileInfo[] => {
     const [filePattern] = _getGlobPatterns(translationFile);
     const results: FileInfo[] = [];
 
@@ -62,12 +76,12 @@ export const getDownloadFileInfosOfTranslationFile = (translationFile: Translati
     });
 
     return results;
-}
+};
 
 export const readContent = (path: string): string => {
     return fs.readFileSync(path, 'utf8');
-}
+};
 
 export const writeContent = (path: string, content: string): void => {
     return fs.writeFileSync(path, content);
-}
+};
