@@ -57,10 +57,8 @@ var path_1 = __importDefault(require("path"));
 var yargs_1 = __importDefault(require("yargs"));
 var helpers_1 = require("yargs/helpers");
 var config_1 = require("./lib/config");
-var download_1 = __importDefault(require("./actions/download"));
-var init_1 = __importDefault(require("./actions/init"));
 var model_1 = require("./lib/model");
-var upload_1 = __importDefault(require("./actions/upload"));
+var actions_1 = require("./actions");
 var actionFromString = function (action) {
     switch (action) {
         case 'init':
@@ -214,11 +212,11 @@ var actionHandler = function (options) { return __awaiter(void 0, void 0, void 0
                     case model_1.Action.DOWNLOAD: return [3 /*break*/, 5];
                 }
                 return [3 /*break*/, 7];
-            case 1: return [4 /*yield*/, (0, init_1.default)(options)];
+            case 1: return [4 /*yield*/, (0, actions_1.init)(options)];
             case 2: return [2 /*return*/, _b.sent()];
-            case 3: return [4 /*yield*/, (0, upload_1.default)(options)];
+            case 3: return [4 /*yield*/, (0, actions_1.upload)(options)];
             case 4: return [2 /*return*/, _b.sent()];
-            case 5: return [4 /*yield*/, (0, download_1.default)(options)];
+            case 5: return [4 /*yield*/, (0, actions_1.download)(options)];
             case 6: return [2 /*return*/, _b.sent()];
             case 7: return [3 /*break*/, 8];
             case 8: return [2 /*return*/];

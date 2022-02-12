@@ -40,32 +40,31 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-var fs_1 = __importDefault(require("fs"));
-var util_1 = require("../lib/util");
+var projectConfig_1 = require("../lib/projectConfig");
+var log_1 = require("../lib/log");
+var task_1 = require("../lib/task");
+var fileInfo_1 = require("../lib/fileInfo");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var projectConfig, taskList;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                (0, util_1.logHeader)('UPLOAD');
+                (0, log_1.logHeader)('UPLOAD');
                 if (!!options.existsProjectConfigFile) return [3 /*break*/, 2];
-                return [4 /*yield*/, (0, util_1.missingConfigFile)(options)];
+                return [4 /*yield*/, (0, projectConfig_1.missingProjectConfigFile)(options)];
             case 1: return [2 /*return*/, _a.sent()];
             case 2:
-                projectConfig = (0, util_1.getProjectConfig)(options.configFilePath);
-                taskList = (0, util_1.getUploadTasksFromTranslationFiles)(projectConfig.translation_files, function (translationFile, fileInfo) { return __awaiter(void 0, void 0, void 0, function () {
-                    var content, response, error_1;
+                projectConfig = (0, projectConfig_1.getProjectConfig)(options.configFilePath);
+                taskList = (0, task_1.getUploadTasksFromTranslationFiles)(projectConfig.translation_files, function (translationFile, fileInfo) { return __awaiter(void 0, void 0, void 0, function () {
+                    var response, error_1;
                     var _a, _b, _c;
                     return __generator(this, function (_d) {
                         switch (_d.label) {
                             case 0:
-                                content = fs_1.default.readFileSync(fileInfo.path, 'utf8');
-                                _d.label = 1;
-                            case 1:
-                                _d.trys.push([1, 3, , 4]);
+                                _d.trys.push([0, 2, , 3]);
                                 return [4 /*yield*/, axios_1.default.post("/api/translation-files/".concat((_a = translationFile.id) !== null && _a !== void 0 ? _a : null, "/upload"), {
                                         translation_file: translationFile,
-                                        content: content,
+                                        content: (0, fileInfo_1.readContent)(fileInfo.path),
                                     }, {
                                         params: {
                                             overwrite: options.overwriteTranslations,
@@ -73,14 +72,14 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                             api_key: projectConfig.project_api_key,
                                         },
                                     })];
-                            case 2:
+                            case 1:
                                 response = _d.sent();
                                 translationFile.id = (_b = response.data.translation_file_id) !== null && _b !== void 0 ? _b : translationFile.id;
-                                return [3 /*break*/, 4];
-                            case 3:
+                                return [3 /*break*/, 3];
+                            case 2:
                                 error_1 = _d.sent();
                                 return [2 /*return*/, Promise.reject(new Error((_c = error_1.response.data.message) !== null && _c !== void 0 ? _c : error_1.message))];
-                            case 4: return [2 /*return*/];
+                            case 3: return [2 /*return*/];
                         }
                     });
                 }); });
@@ -89,7 +88,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                     task: function () { return __awaiter(void 0, void 0, void 0, function () {
                         return __generator(this, function (_a) {
                             switch (_a.label) {
-                                case 0: return [4 /*yield*/, (0, util_1.saveProjectConfig)(options.configFilePath, projectConfig)];
+                                case 0: return [4 /*yield*/, (0, projectConfig_1.saveProjectConfig)(options.configFilePath, projectConfig)];
                                 case 1:
                                     _a.sent();
                                     return [2 /*return*/];
@@ -97,7 +96,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                         });
                     }); }
                 });
-                return [4 /*yield*/, (0, util_1.runTasks)(taskList)];
+                return [4 /*yield*/, (0, task_1.runTasks)(taskList)];
             case 3:
                 _a.sent();
                 return [2 /*return*/];

@@ -39,51 +39,47 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var axios_1 = __importDefault(require("axios"));
-var projectConfig_1 = require("../lib/projectConfig");
-var log_1 = require("../lib/log");
-var task_1 = require("../lib/task");
-var fileInfo_1 = require("../lib/fileInfo");
-exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
-    var projectConfig, taskList;
+exports.missingProjectConfigFile = exports.saveProjectConfig = exports.getProjectConfig = exports.createProjectConfig = void 0;
+var fs_1 = __importDefault(require("fs"));
+var config_1 = require("./config");
+var task_1 = require("./task");
+var createProjectConfig = function (projectApiKey, translationFiles, version) {
+    if (version === void 0) { version = 1; }
+    var config = {
+        version: version,
+        project_api_key: projectApiKey,
+        translation_files: translationFiles,
+    };
+    return config;
+};
+exports.createProjectConfig = createProjectConfig;
+var getProjectConfig = function (configFilePath) {
+    var data = fs_1.default.readFileSync(configFilePath, 'utf8');
+    return JSON.parse(data);
+};
+exports.getProjectConfig = getProjectConfig;
+var saveProjectConfig = function (configFilePath, projectConfig) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        fs_1.default.writeFileSync(configFilePath, JSON.stringify(projectConfig, null, config_1.INDENT));
+        return [2 /*return*/];
+    });
+}); };
+exports.saveProjectConfig = saveProjectConfig;
+var missingProjectConfigFile = function (options) { return __awaiter(void 0, void 0, void 0, function () {
+    var taskList;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                (0, log_1.logHeader)('DOWNLOAD');
-                if (!!options.existsProjectConfigFile) return [3 /*break*/, 2];
-                return [4 /*yield*/, (0, projectConfig_1.missingProjectConfigFile)(options)];
-            case 1: return [2 /*return*/, _a.sent()];
-            case 2:
-                projectConfig = (0, projectConfig_1.getProjectConfig)(options.configFilePath);
-                taskList = (0, task_1.getDownloadTasksFromTranslationFiles)(projectConfig.translation_files, function (translationFile, fileInfo) { return __awaiter(void 0, void 0, void 0, function () {
-                    var response, error_1;
-                    var _a, _b;
-                    return __generator(this, function (_c) {
-                        switch (_c.label) {
-                            case 0:
-                                _c.trys.push([0, 2, , 3]);
-                                return [4 /*yield*/, axios_1.default.get("/api/translation-files/".concat((_a = translationFile.id) !== null && _a !== void 0 ? _a : null, "/download"), {
-                                        params: {
-                                            locale: fileInfo.locale,
-                                            api_key: projectConfig.project_api_key,
-                                        },
-                                    })];
-                            case 1:
-                                response = _c.sent();
-                                (0, fileInfo_1.writeContent)(fileInfo.path, response.data.content);
-                                return [3 /*break*/, 3];
-                            case 2:
-                                error_1 = _c.sent();
-                                return [2 /*return*/, Promise.reject(new Error((_b = error_1.response.data.message) !== null && _b !== void 0 ? _b : error_1.message))];
-                            case 3: return [2 /*return*/];
-                        }
-                    });
-                }); });
+                taskList = [
+                    {
+                        title: "Missing config file: ".concat(options.configFilePath),
+                        task: function () { return Promise.reject(new Error('Create config file or init project!')); },
+                    },
+                ];
                 return [4 /*yield*/, (0, task_1.runTasks)(taskList)];
-            case 3:
-                _a.sent();
-                return [2 /*return*/];
+            case 1: return [2 /*return*/, _a.sent()];
         }
     });
-}); });
-//# sourceMappingURL=download.js.map
+}); };
+exports.missingProjectConfigFile = missingProjectConfigFile;
+//# sourceMappingURL=projectConfig.js.map

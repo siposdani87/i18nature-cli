@@ -5,10 +5,8 @@ import path from 'path';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 import { BASE_URL, CURRENT_WORK_DIR, DEBUG_BASE_URL, DEBUG_FILENAME, DEFAULT_API_KEY, FILENAME } from './lib/config';
-import download from './actions/download';
-import init from './actions/init';
 import { Action, Options } from './lib/model';
-import upload from './actions/upload';
+import { init, upload, download } from './actions';
 
 const actionFromString = (action: string): Action => {
     switch (action) {

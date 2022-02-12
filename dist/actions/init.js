@@ -51,22 +51,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var axios_1 = __importDefault(require("axios"));
-var util_1 = require("../lib/util");
-var _getProjectConfig = function (projectApiKey, translationFiles, version) {
-    if (version === void 0) { version = 1; }
-    var config = {
-        version: version,
-        project_api_key: projectApiKey,
-        translation_files: translationFiles,
-    };
-    return config;
-};
+var projectConfig_1 = require("../lib/projectConfig");
+var log_1 = require("../lib/log");
+var task_1 = require("../lib/task");
 exports.default = (function (options) { return __awaiter(void 0, void 0, void 0, function () {
     var taskList_1, taskList;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
-                (0, util_1.logHeader)('INIT');
+                (0, log_1.logHeader)('INIT');
                 if (!!options.overwriteConfigFile) return [3 /*break*/, 2];
                 taskList_1 = [
                     {
@@ -74,7 +67,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                         task: function () { return Promise.reject(new Error('Config file overwrite is not allowed!')); },
                     },
                 ];
-                return [4 /*yield*/, (0, util_1.runTasks)(taskList_1)];
+                return [4 /*yield*/, (0, task_1.runTasks)(taskList_1)];
             case 1: return [2 /*return*/, _a.sent()];
             case 2:
                 taskList = [
@@ -97,8 +90,8 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                                         translationFiles = response.data.translation_files.map(function (translationFile) {
                                             return __assign(__assign({}, translationFile), { directory: options.directory });
                                         });
-                                        projectConfig = _getProjectConfig(options.projectApiKey, translationFiles);
-                                        return [4 /*yield*/, (0, util_1.saveProjectConfig)(options.configFilePath, projectConfig)];
+                                        projectConfig = (0, projectConfig_1.createProjectConfig)(options.projectApiKey, translationFiles);
+                                        return [4 /*yield*/, (0, projectConfig_1.saveProjectConfig)(options.configFilePath, projectConfig)];
                                     case 2:
                                         _b.sent();
                                         return [3 /*break*/, 4];
@@ -111,7 +104,7 @@ exports.default = (function (options) { return __awaiter(void 0, void 0, void 0,
                         }); }
                     },
                 ];
-                return [4 /*yield*/, (0, util_1.runTasks)(taskList)];
+                return [4 /*yield*/, (0, task_1.runTasks)(taskList)];
             case 3:
                 _a.sent();
                 return [2 /*return*/];

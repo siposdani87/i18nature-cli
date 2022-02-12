@@ -1,20 +1,12 @@
 import axios from 'axios';
-import { Options, ProjectConfig, TranslationFile } from '../lib/model';
-import { logHeader, runTasks, saveProjectConfig } from '../lib/util';
+import { Options, TranslationFile } from '../lib/model';
+import { createProjectConfig, saveProjectConfig } from '../lib/projectConfig';
+import { logHeader } from '../lib/log';
+import { runTasks } from '../lib/task';
 
 interface InitResponse {
     translation_files: TranslationFile[];
     supported_languages: string[];
-}
-
-const _getProjectConfig = (projectApiKey: string, translationFiles: TranslationFile[], version = 1): ProjectConfig => {
-    const config = {
-        version,
-        project_api_key: projectApiKey,
-        translation_files: translationFiles,
-    };
-
-    return config;
 }
 
 export default async (options: Options): Promise<void> => {
@@ -48,7 +40,7 @@ export default async (options: Options): Promise<void> => {
                         };
                     });
 
-                    const projectConfig = _getProjectConfig(options.projectApiKey, translationFiles);
+                    const projectConfig = createProjectConfig(options.projectApiKey, translationFiles);
                     await saveProjectConfig(options.configFilePath, projectConfig);
                 } catch (error: any) {
                     return Promise.reject(new Error(error.response.data.message ?? error.message));
