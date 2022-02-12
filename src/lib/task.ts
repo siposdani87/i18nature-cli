@@ -1,8 +1,17 @@
 import Listr from 'listr';
-import { getDownloadFileInfosOfTranslationFile, getUploadFileInfosOfTranslationFile } from './fileInfo';
+import {
+    getDownloadFileInfosOfTranslationFile,
+    getUploadFileInfosOfTranslationFile,
+} from './fileInfo';
 import { FileInfo, TranslationFile } from './model';
 
-export const getUploadTasksFromTranslationFiles = (translationFiles: TranslationFile[], taskCallback: (translationFile: TranslationFile, fileInfo: FileInfo) => Promise<void>): Listr.ListrTask<any>[] => {
+export const getUploadTasksFromTranslationFiles = (
+    translationFiles: TranslationFile[],
+    taskCallback: (
+        translationFile: TranslationFile,
+        fileInfo: FileInfo,
+    ) => Promise<void>,
+): Listr.ListrTask<any>[] => {
     return _getTasksFromTranslationFileData({
         title: 'Upload translation file',
         subtitle: 'Upload data of',
@@ -10,9 +19,15 @@ export const getUploadTasksFromTranslationFiles = (translationFiles: Translation
         fileInfoCallback: getUploadFileInfosOfTranslationFile,
         taskCallback,
     });
-}
+};
 
-export const getDownloadTasksFromTranslationFiles = (translationFiles: TranslationFile[], taskCallback: (translationFile: TranslationFile, fileInfo: FileInfo) => Promise<void>): Listr.ListrTask<any>[] => {
+export const getDownloadTasksFromTranslationFiles = (
+    translationFiles: TranslationFile[],
+    taskCallback: (
+        translationFile: TranslationFile,
+        fileInfo: FileInfo,
+    ) => Promise<void>,
+): Listr.ListrTask<any>[] => {
     return _getTasksFromTranslationFileData({
         title: 'Download translation file',
         subtitle: 'Download data of',
@@ -20,14 +35,17 @@ export const getDownloadTasksFromTranslationFiles = (translationFiles: Translati
         fileInfoCallback: getDownloadFileInfosOfTranslationFile,
         taskCallback,
     });
-}
+};
 
 const _getTasksFromTranslationFileData = (data: {
-    title: string,
-    subtitle: string,
-    translationFiles: TranslationFile[],
-    fileInfoCallback: (translationFile: TranslationFile) => FileInfo[],
-    taskCallback: (translationFile: TranslationFile, fileInfo: FileInfo) => Promise<void>
+    title: string;
+    subtitle: string;
+    translationFiles: TranslationFile[];
+    fileInfoCallback: (translationFile: TranslationFile) => FileInfo[];
+    taskCallback: (
+        translationFile: TranslationFile,
+        fileInfo: FileInfo,
+    ) => Promise<void>;
 }): Listr.ListrTask<any>[] => {
     const taskList: Listr.ListrTask<any>[] = [];
 
@@ -37,12 +55,12 @@ const _getTasksFromTranslationFileData = (data: {
             task: async () => {
                 const subTaskList: Listr.ListrTask<any>[] = [];
                 const fileInfos = data.fileInfoCallback(translationFile);
-                fileInfos.forEach(fileInfo => {
+                fileInfos.forEach((fileInfo) => {
                     subTaskList.push({
                         title: `${data.subtitle}: ${fileInfo.path}`,
                         task: async () => {
                             await data.taskCallback(translationFile, fileInfo);
-                        }
+                        },
                     });
                 });
 
@@ -52,11 +70,14 @@ const _getTasksFromTranslationFileData = (data: {
     });
 
     return taskList;
-}
+};
 
-export const runTasks = async (taskList: Listr.ListrTask<any>[]): Promise<void> => {
+export const runTasks = async (
+    taskList: Listr.ListrTask<any>[],
+): Promise<void> => {
     const tasks = new Listr(taskList);
-    await tasks.run().catch((reason): void => {
+
+    return await tasks.run().catch((reason): void => {
         console.log(reason);
     });
-}
+};

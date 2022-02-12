@@ -3,8 +3,7 @@
 'use strict';
 
 // eslint-disable-next-line
-require = require('esm')(module /*, options*/);
+require = require('esm')(module/*, options*/);
 
-// eslint-disable-next-line
-const cli = require('../dist').default;
+const cli = require('../dist').CLI;
 cli(process.argv);

@@ -16,7 +16,10 @@ export default async (options: Options): Promise<void> => {
         const taskList = [
             {
                 title: `Create config file: ${options.configFilePath}`,
-                task: () => Promise.reject(new Error('Config file overwrite is not allowed!')),
+                task: () =>
+                    Promise.reject(
+                        new Error('Config file overwrite is not allowed!'),
+                    ),
             },
         ];
 
@@ -28,24 +31,38 @@ export default async (options: Options): Promise<void> => {
             title: `Create config file: ${options.configFilePath}`,
             task: async () => {
                 try {
-                    const response = await axios.get<InitResponse>(`/api/projects/init`, {
-                        params: {
-                            api_key: options.projectApiKey,
+                    const response = await axios.get<InitResponse>(
+                        `/api/projects/init`,
+                        {
+                            params: {
+                                api_key: options.projectApiKey,
+                            },
                         },
-                    });
-                    const translationFiles = response.data.translation_files.map((translationFile): TranslationFile => {
-                        return {
-                            ...translationFile,
-                            directory: options.directory,
-                        };
-                    });
+                    );
+                    const translationFiles =
+                        response.data.translation_files.map(
+                            (translationFile): TranslationFile => {
+                                return {
+                                    ...translationFile,
+                                    directory: options.directory,
+                                };
+                            },
+                        );
 
-                    const projectConfig = createProjectConfig(options.projectApiKey, translationFiles);
-                    await saveProjectConfig(options.configFilePath, projectConfig);
+                    const projectConfig = createProjectConfig(
+                        options.projectApiKey,
+                        translationFiles,
+                    );
+                    await saveProjectConfig(
+                        options.configFilePath,
+                        projectConfig,
+                    );
                 } catch (error: any) {
-                    return Promise.reject(new Error(error.response.data.message ?? error.message));
+                    return Promise.reject(
+                        new Error(error.response.data.message ?? error.message),
+                    );
                 }
-            }
+            },
         },
     ];
 

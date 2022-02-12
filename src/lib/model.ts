@@ -1,5 +1,8 @@
 export enum Action {
-    NONE, INIT, UPLOAD, DOWNLOAD,
+    NONE,
+    INIT,
+    UPLOAD,
+    DOWNLOAD,
 }
 
 export interface Options {
