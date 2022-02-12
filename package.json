@@ -29,12 +29,14 @@
   ],
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc -p .",
+    "build": "npm run webpack",
+    "tsc": "tsc -p .",
     "clean": "rm -rf dist",
     "lint": "eslint --ext ts src/",
     "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write 'src/**/*.ts*'"
+    "format": "prettier --write 'src/**/*.ts*'",
+    "webpack": "npx webpack"
   },
   "keywords": [
     "i18nature",
@@ -67,6 +69,10 @@
     "eslint": "^8.0.1",
     "eslint-config-prettier": "^8.3.0",
     "prettier": "2.5.1",
-    "typescript": "^4.4.4"
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.5",
+    "webpack": "^5.68.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-node-externals": "^3.0.0"
   }
 }
