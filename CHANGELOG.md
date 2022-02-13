@@ -2,8 +2,10 @@
 
 *
 
-## 0.6.0 - 2022-02-12
+## 0.6.0 - 2022-02-13
 
+* Add sourceMap file
+* Create single file bundle 
 * Setup webpack and prettier
 
 ## 0.5.0 - 2022-02-12

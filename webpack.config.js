@@ -3,6 +3,7 @@ const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
     mode: 'production',
+    devtool: 'source-map',
     entry: './src/index.ts',
     module: {
         rules: [
@@ -23,7 +24,7 @@ module.exports = {
     },
     output: {
         library: {
-            name: 'CLI',
+            name: 'default',
             type: 'commonjs',
             export: 'default',
         },

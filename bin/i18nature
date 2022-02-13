@@ -5,5 +5,5 @@
 // eslint-disable-next-line
 require = require('esm')(module/*, options*/);
 
-const cli = require('../dist').CLI;
+const cli = require('../dist').default;
 cli(process.argv);
