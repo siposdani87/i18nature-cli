@@ -67,12 +67,10 @@ export const getDownloadFileInfosOfTranslationFile = (
 
     translationFile.locales.forEach((locale): void => {
         const filePath = _resolvePathPattern(filePattern, locale);
-        if (locale) {
-            results.push({
-                path: filePath,
-                locale,
-            });
-        }
+        results.push({
+            path: filePath,
+            locale,
+        });
     });
 
     return results;
