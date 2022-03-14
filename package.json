@@ -30,12 +30,12 @@
   "scripts": {
     "prebuild": "npm run clean",
     "build": "npm run webpack",
-    "tsc": "tsc -p .",
+    "tsc": "npx -p typescript tsc",
     "clean": "rm -rf dist",
-    "lint": "eslint --ext ts src/",
+    "lint": "npx eslint --ext ts src/",
     "lint:fix": "npm run lint -- --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "format": "prettier --write 'src/**/*.ts*'",
+    "format": "npx prettier --write 'src/**/*.ts*'",
     "webpack": "npx webpack"
   },
   "keywords": [
