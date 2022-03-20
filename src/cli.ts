@@ -14,6 +14,8 @@ import {
 } from './lib/config';
 import { Action, Options } from './lib/model';
 import { init, upload, download } from './actions';
+import { runTasks } from './lib/task';
+import { ListrTask } from 'listr';
 
 const actionFromString = (action: string): Action => {
     switch (action) {
@@ -186,23 +188,24 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
     };
 };
 
-const actionHandler = async (options: Options): Promise<void> => {
+const actionHandler = (options: Options): ListrTask<any>[] => {
     axios.defaults.baseURL = options.debug ? DEBUG_BASE_URL : BASE_URL;
 
     switch (options.action) {
         case Action.INIT:
-            return await init(options);
+            return init(options);
         case Action.UPLOAD:
-            return await upload(options);
+            return upload(options);
         case Action.DOWNLOAD:
-            return await download(options);
+            return download(options);
         default:
-            break;
+            return [];
     }
 };
 
 export default async (args: string[]): Promise<void> => {
     let options = await parseArgumentsIntoOptions(args);
     options = await promptForMissingOptions(options);
-    await actionHandler(options);
+    const taskList = actionHandler(options);
+    return await runTasks(taskList);
 };

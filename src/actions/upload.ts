@@ -6,18 +6,19 @@ import {
 } from '../lib/projectConfig';
 import { Options } from '../lib/model';
 import { logHeader } from '../lib/log';
-import { getUploadTasksFromTranslationFiles, runTasks } from '../lib/task';
+import { getUploadTasksFromTranslationFiles } from '../lib/task';
 import { readContent } from '../lib/fileInfo';
+import { ListrTask } from 'listr';
 
 interface UploadResponse {
     translation_file_id?: string;
 }
 
-export default async (options: Options): Promise<void> => {
+export default (options: Options): ListrTask<any>[] => {
     logHeader('UPLOAD');
 
     if (!options.existsProjectConfigFile) {
-        return await missingProjectConfigFile(options);
+        return missingProjectConfigFile(options);
     }
 
     const projectConfig = getProjectConfig(options.configFilePath);
@@ -58,5 +59,5 @@ export default async (options: Options): Promise<void> => {
         },
     });
 
-    await runTasks(taskList);
+    return taskList;
 };

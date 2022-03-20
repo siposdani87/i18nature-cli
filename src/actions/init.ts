@@ -1,32 +1,26 @@
 import axios from 'axios';
 import { Options, TranslationFile } from '../lib/model';
-import { createProjectConfig, saveProjectConfig } from '../lib/projectConfig';
+import {
+    createProjectConfig,
+    overwriteNotAllowedProjectConfigFile,
+    saveProjectConfig,
+} from '../lib/projectConfig';
 import { logHeader } from '../lib/log';
-import { runTasks } from '../lib/task';
+import { ListrTask } from 'listr';
 
 interface InitResponse {
     translation_files: TranslationFile[];
     supported_languages: string[];
 }
 
-export default async (options: Options): Promise<void> => {
+export default (options: Options): ListrTask<any>[] => {
     logHeader('INIT');
 
     if (!options.overwriteConfigFile) {
-        const taskList = [
-            {
-                title: `Create config file: ${options.configFilePath}`,
-                task: () =>
-                    Promise.reject(
-                        new Error('Config file overwrite is not allowed!'),
-                    ),
-            },
-        ];
-
-        return await runTasks(taskList);
+        return overwriteNotAllowedProjectConfigFile(options);
     }
 
-    const taskList = [
+    return [
         {
             title: `Create config file: ${options.configFilePath}`,
             task: async () => {
@@ -65,6 +59,4 @@ export default async (options: Options): Promise<void> => {
             },
         },
     ];
-
-    await runTasks(taskList);
 };
