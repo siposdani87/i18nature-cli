@@ -5,22 +5,23 @@ import {
 } from '../lib/projectConfig';
 import { Options } from '../lib/model';
 import { logHeader } from '../lib/log';
-import { getDownloadTasksFromTranslationFiles, runTasks } from '../lib/task';
+import { getDownloadTasksFromTranslationFiles } from '../lib/task';
 import { writeContent } from '../lib/fileInfo';
+import { ListrTask } from 'listr';
 
 interface DownloadResponse {
     content: string;
 }
 
-export default async (options: Options): Promise<void> => {
+export default (options: Options): ListrTask<any>[] => {
     logHeader('DOWNLOAD');
 
     if (!options.existsProjectConfigFile) {
-        return await missingProjectConfigFile(options);
+        return missingProjectConfigFile(options);
     }
 
     const projectConfig = getProjectConfig(options.configFilePath);
-    const taskList = getDownloadTasksFromTranslationFiles(
+    return getDownloadTasksFromTranslationFiles(
         projectConfig.translation_files,
         async (translationFile, fileInfo): Promise<void> => {
             try {
@@ -43,6 +44,4 @@ export default async (options: Options): Promise<void> => {
             }
         },
     );
-
-    await runTasks(taskList);
 };

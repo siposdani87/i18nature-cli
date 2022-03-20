@@ -1,4 +1,4 @@
-import Listr from 'listr';
+import Listr, { ListrTask } from 'listr';
 import {
     getDownloadFileInfosOfTranslationFile,
     getUploadFileInfosOfTranslationFile,
@@ -11,7 +11,7 @@ export const getUploadTasksFromTranslationFiles = (
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>,
-): Listr.ListrTask<any>[] => {
+): ListrTask<any>[] => {
     return _getTasksFromTranslationFileData({
         title: 'Upload translation file',
         subtitle: 'Upload data of',
@@ -27,7 +27,7 @@ export const getDownloadTasksFromTranslationFiles = (
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>,
-): Listr.ListrTask<any>[] => {
+): ListrTask<any>[] => {
     return _getTasksFromTranslationFileData({
         title: 'Download translation file',
         subtitle: 'Download data of',
@@ -46,14 +46,14 @@ const _getTasksFromTranslationFileData = (data: {
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>;
-}): Listr.ListrTask<any>[] => {
-    const taskList: Listr.ListrTask<any>[] = [];
+}): ListrTask<any>[] => {
+    const taskList: ListrTask<any>[] = [];
 
     data.translationFiles.forEach(async (translationFile): Promise<void> => {
         taskList.push({
             title: `${data.title}: ${translationFile.name}`,
             task: async () => {
-                const subTaskList: Listr.ListrTask<any>[] = [];
+                const subTaskList: ListrTask<any>[] = [];
                 const fileInfos = data.fileInfoCallback(translationFile);
                 fileInfos.forEach((fileInfo) => {
                     subTaskList.push({
@@ -72,9 +72,7 @@ const _getTasksFromTranslationFileData = (data: {
     return taskList;
 };
 
-export const runTasks = async (
-    taskList: Listr.ListrTask<any>[],
-): Promise<void> => {
+export const runTasks = async (taskList: ListrTask<any>[]): Promise<void> => {
     const tasks = new Listr(taskList);
 
     return await tasks.run().catch((reason): void => {

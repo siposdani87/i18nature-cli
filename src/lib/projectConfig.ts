@@ -1,20 +1,18 @@
 import fs from 'fs';
+import { ListrTask } from 'listr';
 import { INDENT } from './config';
 import { Options, ProjectConfig, TranslationFile } from './model';
-import { runTasks } from './task';
 
 export const createProjectConfig = (
     projectApiKey: string,
     translationFiles: TranslationFile[],
     version = 1,
 ): ProjectConfig => {
-    const config = {
+    return {
         version,
         project_api_key: projectApiKey,
         translation_files: translationFiles,
     };
-
-    return config;
 };
 
 export const getProjectConfig = (configFilePath: string): ProjectConfig => {
@@ -33,10 +31,10 @@ export const saveProjectConfig = async (
     );
 };
 
-export const missingProjectConfigFile = async (
+export const missingProjectConfigFile = (
     options: Options,
-): Promise<void> => {
-    const taskList = [
+): ListrTask<any>[] => {
+    return [
         {
             title: `Missing config file: ${options.configFilePath}`,
             task: () =>
@@ -45,6 +43,18 @@ export const missingProjectConfigFile = async (
                 ),
         },
     ];
+};
 
-    return await runTasks(taskList);
+export const overwriteNotAllowedProjectConfigFile = (
+    options: Options,
+): ListrTask<any>[] => {
+    return [
+        {
+            title: `Create config file: ${options.configFilePath}`,
+            task: () =>
+                Promise.reject(
+                    new Error('Config file overwrite is not allowed!'),
+                ),
+        },
+    ];
 };

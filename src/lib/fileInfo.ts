@@ -40,7 +40,7 @@ export const getUploadFileInfosOfTranslationFile = (
 ): FileInfo[] => {
     const [filePattern, globPattern] = _getGlobPatterns(translationFile);
     const files = glob.sync(globPattern);
-    const results: FileInfo[] = [];
+    const fileInfos: FileInfo[] = [];
 
     files.forEach((filePath): void => {
         const locale = _getLocaleFrom(
@@ -49,31 +49,31 @@ export const getUploadFileInfosOfTranslationFile = (
             translationFile.locales,
         );
         if (locale) {
-            results.push({
+            fileInfos.push({
                 path: filePath,
                 locale,
             });
         }
     });
 
-    return results;
+    return fileInfos;
 };
 
 export const getDownloadFileInfosOfTranslationFile = (
     translationFile: TranslationFile,
 ): FileInfo[] => {
     const [filePattern] = _getGlobPatterns(translationFile);
-    const results: FileInfo[] = [];
+    const fileInfos: FileInfo[] = [];
 
     translationFile.locales.forEach((locale): void => {
         const filePath = _resolvePathPattern(filePattern, locale);
-        results.push({
+        fileInfos.push({
             path: filePath,
             locale,
         });
     });
 
-    return results;
+    return fileInfos;
 };
 
 export const readContent = (path: string): string => {
