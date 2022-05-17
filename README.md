@@ -1,6 +1,8 @@
 [![Version](https://img.shields.io/npm/v/i18nature-cli.svg?style=square)](https://www.npmjs.com/package/i18nature-cli)
 [![Download](https://img.shields.io/npm/dt/i18nature-cli.svg?style=square)](https://www.npmjs.com/package/i18nature-cli)
 [![License](https://img.shields.io/npm/l/i18nature-cli.svg?style=square)](./LICENSE)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=siposdani87_i18nature-cli&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=siposdani87_i18nature-cli)
+
 
 # I18Nature-CLI
 
