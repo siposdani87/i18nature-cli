@@ -18,19 +18,15 @@
         "resolveJsonModule": true,
         "esModuleInterop": true,
         "types": [
-            "node",
+            "node", "jest"
         ],
     },
     "include": [
         "src"
     ],
     "exclude": [
-        "**/__mocks__/*",
-        "**/__tests__/*",
-        "**/templates/*",
+        "dist",
         "node_modules",
-        "**/*.test.ts",
-        "**/*.spec.ts",
-        "dist"
+        "**/*.spec.ts"
     ]
 }
