@@ -3,7 +3,7 @@ import {
     getDownloadFileInfosOfTranslationFile,
     getUploadFileInfosOfTranslationFile,
 } from './fileInfo';
-import { FileInfo, TranslationFile } from './model';
+import { FileInfo, TranslationFile } from './types';
 
 export const getUploadTasksFromTranslationFiles = (
     translationFiles: TranslationFile[],
@@ -11,7 +11,7 @@ export const getUploadTasksFromTranslationFiles = (
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>,
-): ListrTask<any>[] => {
+): ListrTask[] => {
     return _getTasksFromTranslationFileData({
         title: 'Upload translation file',
         subtitle: 'Upload data of',
@@ -27,7 +27,7 @@ export const getDownloadTasksFromTranslationFiles = (
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>,
-): ListrTask<any>[] => {
+): ListrTask[] => {
     return _getTasksFromTranslationFileData({
         title: 'Download translation file',
         subtitle: 'Download data of',
@@ -46,14 +46,14 @@ const _getTasksFromTranslationFileData = (data: {
         translationFile: TranslationFile,
         fileInfo: FileInfo,
     ) => Promise<void>;
-}): ListrTask<any>[] => {
-    const taskList: ListrTask<any>[] = [];
+}): ListrTask[] => {
+    const taskList: ListrTask[] = [];
 
     data.translationFiles.forEach(async (translationFile): Promise<void> => {
         taskList.push({
             title: `${data.title}: ${translationFile.name}`,
             task: async () => {
-                const subTaskList: ListrTask<any>[] = [];
+                const subTaskList: ListrTask[] = [];
                 const fileInfos = data.fileInfoCallback(translationFile);
                 fileInfos.forEach((fileInfo) => {
                     subTaskList.push({
@@ -72,10 +72,10 @@ const _getTasksFromTranslationFileData = (data: {
     return taskList;
 };
 
-export const runTasks = async (taskList: ListrTask<any>[]): Promise<void> => {
+export const runTasks = async (taskList: ListrTask[]): Promise<void> => {
     const tasks = new Listr(taskList);
 
-    return await tasks.run().catch((reason): void => {
+    return tasks.run().catch((reason): void => {
         console.log(reason);
     });
 };

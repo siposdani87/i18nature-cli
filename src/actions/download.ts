@@ -3,7 +3,7 @@ import {
     getProjectConfig,
     missingProjectConfigFile,
 } from '../lib/projectConfig';
-import { Options } from '../lib/model';
+import { Options } from '../lib/types';
 import { logHeader } from '../lib/log';
 import { getDownloadTasksFromTranslationFiles } from '../lib/task';
 import { writeContent } from '../lib/fileInfo';
@@ -13,7 +13,7 @@ interface DownloadResponse {
     content: string;
 }
 
-export default (options: Options): ListrTask<any>[] => {
+export default (options: Options): ListrTask[] => {
     logHeader('DOWNLOAD');
 
     if (!options.existsProjectConfigFile) {
