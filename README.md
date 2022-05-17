@@ -82,7 +82,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 
 ### Locale directory hierarchy
 
-⚠️ **WARNING**: You can use `language` (en) and `locale` (en-GB) keys in directory, filename as well.
+⚠️ **WARNING**: You can use `language` (en) and `locale` (en-GB) placeholder keys in directory, filename as well.
 
 Example project strucure in this repository:
 ```
