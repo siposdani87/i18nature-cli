@@ -1,7 +1,7 @@
 import fs from 'fs';
 import { ListrTask } from 'listr';
 import { INDENT } from './config';
-import { Options, ProjectConfig, TranslationFile } from './model';
+import { Options, ProjectConfig, TranslationFile } from './types';
 
 export const createProjectConfig = (
     projectApiKey: string,
@@ -31,9 +31,7 @@ export const saveProjectConfig = async (
     );
 };
 
-export const missingProjectConfigFile = (
-    options: Options,
-): ListrTask<any>[] => {
+export const missingProjectConfigFile = (options: Options): ListrTask[] => {
     return [
         {
             title: `Missing config file: ${options.configFilePath}`,
@@ -47,7 +45,7 @@ export const missingProjectConfigFile = (
 
 export const overwriteNotAllowedProjectConfigFile = (
     options: Options,
-): ListrTask<any>[] => {
+): ListrTask[] => {
     return [
         {
             title: `Create config file: ${options.configFilePath}`,

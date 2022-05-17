@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Options, TranslationFile } from '../lib/model';
+import { Options, TranslationFile } from '../lib/types';
 import {
     createProjectConfig,
     overwriteNotAllowedProjectConfigFile,
@@ -13,7 +13,7 @@ interface InitResponse {
     supported_languages: string[];
 }
 
-export default (options: Options): ListrTask<any>[] => {
+export default (options: Options): ListrTask[] => {
     logHeader('INIT');
 
     if (!options.overwriteConfigFile) {

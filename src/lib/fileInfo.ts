@@ -2,7 +2,7 @@ import glob from 'glob';
 import path from 'path';
 import fs from 'fs';
 import { CURRENT_WORK_DIR } from './config';
-import { FileInfo, TranslationFile } from './model';
+import { FileInfo, TranslationFile } from './types';
 
 const _getGlobPatterns = (translatioFile: TranslationFile): string[] => {
     const directory = translatioFile.directory ?? '';
@@ -23,8 +23,7 @@ const _getLocaleFrom = (
     locales: string[],
 ): string | undefined => {
     return locales.find((locale): boolean => {
-        const path = _resolvePathPattern(filePattern, locale);
-        return path === filePath;
+        return filePath === _resolvePathPattern(filePattern, locale);
     });
 };
 
@@ -76,10 +75,10 @@ export const getDownloadFileInfosOfTranslationFile = (
     return fileInfos;
 };
 
-export const readContent = (path: string): string => {
-    return fs.readFileSync(path, 'utf8');
+export const readContent = (filePath: string): string => {
+    return fs.readFileSync(filePath, 'utf8');
 };
 
-export const writeContent = (path: string, content: string): void => {
-    return fs.writeFileSync(path, content);
+export const writeContent = (filePath: string, content: string): void => {
+    return fs.writeFileSync(filePath, content);
 };

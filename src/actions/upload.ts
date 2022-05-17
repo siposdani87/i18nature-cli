@@ -4,7 +4,7 @@ import {
     missingProjectConfigFile,
     saveProjectConfig,
 } from '../lib/projectConfig';
-import { Options } from '../lib/model';
+import { Options } from '../lib/types';
 import { logHeader } from '../lib/log';
 import { getUploadTasksFromTranslationFiles } from '../lib/task';
 import { readContent } from '../lib/fileInfo';
@@ -14,7 +14,7 @@ interface UploadResponse {
     translation_file_id?: string;
 }
 
-export default (options: Options): ListrTask<any>[] => {
+export default (options: Options): ListrTask[] => {
     logHeader('UPLOAD');
 
     if (!options.existsProjectConfigFile) {

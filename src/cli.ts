@@ -12,7 +12,7 @@ import {
     DEFAULT_API_KEY,
     FILENAME,
 } from './lib/config';
-import { Action, Options } from './lib/model';
+import { Action, Options } from './lib/types';
 import { init, upload, download } from './actions';
 import { runTasks } from './lib/task';
 import { ListrTask } from 'listr';
@@ -43,16 +43,16 @@ const parseArgumentsIntoOptions = async (
         .command(
             'init [project_api_key]',
             'Create .i18naturerc.json file.',
-            (yargs) => {
-                return yargs.positional('project_api_key', {
+            (newYargs) => {
+                return newYargs.positional('project_api_key', {
                     describe: 'project to bind on',
                     default: DEFAULT_API_KEY,
                 });
             },
-            (argv) => {
-                if (argv.verbose) {
+            (newArgv) => {
+                if (newArgv.verbose) {
                     console.info(
-                        `create config file of: ${argv.project_api_key}`,
+                        `create config file of: ${newArgv.project_api_key}`,
                     );
                 }
             },
@@ -60,11 +60,9 @@ const parseArgumentsIntoOptions = async (
         .command(
             'upload',
             'Upload translation files.',
-            (yargs) => {
-                return yargs;
-            },
-            (argv) => {
-                if (argv.verbose) {
+            (newYargs) => newYargs,
+            (newArgv) => {
+                if (newArgv.verbose) {
                     console.info(`upload translation file`);
                 }
             },
@@ -72,11 +70,9 @@ const parseArgumentsIntoOptions = async (
         .command(
             'download',
             'Download translation files.',
-            (yargs) => {
-                return yargs;
-            },
-            (argv) => {
-                if (argv.verbose) {
+            (newYargs) => newYargs,
+            (newArgv) => {
+                if (newArgv.verbose) {
                     console.info(`download translation file`);
                 }
             },
@@ -161,8 +157,8 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             name: 'project_api_key',
             message: 'Project API key?',
             default: projectConfig.project_api_key,
-            when: (answers: any) =>
-                answers.overwriteConfigFile || isDefaultApiKey,
+            when: (newAnswers: any) =>
+                newAnswers.overwriteConfigFile || isDefaultApiKey,
         });
 
         questions.push({
@@ -170,8 +166,9 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             name: 'directory',
             message: 'Relative path of translation files directory?',
             default: 'example/locales',
-            when: (answers: any) =>
-                answers.overwriteConfigFile || !options.existsProjectConfigFile,
+            when: (newAnswers: any) =>
+                newAnswers.overwriteConfigFile ||
+                !options.existsProjectConfigFile,
         });
     }
 
@@ -188,7 +185,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
     };
 };
 
-const actionHandler = (options: Options): ListrTask<any>[] => {
+const actionHandler = (options: Options): ListrTask[] => {
     axios.defaults.baseURL = options.debug ? DEBUG_BASE_URL : BASE_URL;
 
     switch (options.action) {
@@ -207,5 +204,6 @@ export default async (args: string[]): Promise<void> => {
     let options = await parseArgumentsIntoOptions(args);
     options = await promptForMissingOptions(options);
     const taskList = actionHandler(options);
-    return await runTasks(taskList);
+
+    return runTasks(taskList);
 };
