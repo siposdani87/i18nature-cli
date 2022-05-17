@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+    <file path="/Users/dsipos/others/i18nature-cli/src/lib/projectConfig.spec.ts">
+        <testCase name="projectConfig should create a valid project config" duration="2"/>
+    </file>
+</testExecutions>
