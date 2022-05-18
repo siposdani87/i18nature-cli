@@ -25,7 +25,7 @@ export default (options: Options): ListrTask[] => {
         projectConfig.translation_files,
         async (translationFile, fileInfo): Promise<void> => {
             try {
-                const response = await axios.get<DownloadResponse>(
+                const { data } = await axios.get<DownloadResponse>(
                     `/api/translation-files/${
                         translationFile.id ?? null
                     }/download`,
@@ -36,11 +36,9 @@ export default (options: Options): ListrTask[] => {
                         },
                     },
                 );
-                writeContent(fileInfo.path, response.data.content);
+                writeContent(fileInfo.path, data.content);
             } catch (error: any) {
-                return Promise.reject(
-                    new Error(error.response.data.message ?? error.message),
-                );
+                return Promise.reject(error);
             }
         },
     );

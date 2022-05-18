@@ -26,7 +26,7 @@ export default (options: Options): ListrTask[] => {
         projectConfig.translation_files,
         async (translationFile, fileInfo): Promise<void> => {
             try {
-                const response = await axios.post<UploadResponse>(
+                const { data } = await axios.post<UploadResponse>(
                     `/api/translation-files/${
                         translationFile.id ?? null
                     }/upload`,
@@ -42,20 +42,17 @@ export default (options: Options): ListrTask[] => {
                         },
                     },
                 );
-                translationFile.id =
-                    response.data.translation_file_id ?? translationFile.id;
+                translationFile.id = data.translation_file_id;
             } catch (error: any) {
-                return Promise.reject(
-                    new Error(error.response.data.message ?? error.message),
-                );
+                return Promise.reject(error);
             }
         },
     );
 
     taskList.push({
         title: `Modified config file: ${options.configFilePath}`,
-        task: async () => {
-            await saveProjectConfig(options.configFilePath, projectConfig);
+        task: () => {
+            saveProjectConfig(options.configFilePath, projectConfig);
         },
     });
 

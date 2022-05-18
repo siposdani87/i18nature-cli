@@ -21,17 +21,19 @@ export const getProjectConfig = (configFilePath: string): ProjectConfig => {
     return JSON.parse(data) as ProjectConfig;
 };
 
-export const saveProjectConfig = async (
+export const saveProjectConfig = (
     configFilePath: string,
     projectConfig: ProjectConfig,
-): Promise<void> => {
+): void => {
     return fs.writeFileSync(
         configFilePath,
         JSON.stringify(projectConfig, null, INDENT),
     );
 };
 
-export const missingProjectConfigFile = (options: Options): ListrTask[] => {
+export const missingProjectConfigFile = (
+    options: Partial<Options>,
+): ListrTask[] => {
     return [
         {
             title: `Missing config file: ${options.configFilePath}`,
@@ -44,7 +46,7 @@ export const missingProjectConfigFile = (options: Options): ListrTask[] => {
 };
 
 export const overwriteNotAllowedProjectConfigFile = (
-    options: Options,
+    options: Partial<Options>,
 ): ListrTask[] => {
     return [
         {

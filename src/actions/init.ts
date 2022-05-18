@@ -47,14 +47,9 @@ export default (options: Options): ListrTask[] => {
                         options.projectApiKey,
                         translationFiles,
                     );
-                    await saveProjectConfig(
-                        options.configFilePath,
-                        projectConfig,
-                    );
+                    saveProjectConfig(options.configFilePath, projectConfig);
                 } catch (error: any) {
-                    return Promise.reject(
-                        new Error(error.response.data.message ?? error.message),
-                    );
+                    return Promise.reject(error);
                 }
             },
         },
