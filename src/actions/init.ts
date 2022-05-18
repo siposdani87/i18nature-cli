@@ -25,7 +25,7 @@ export default (options: Options): ListrTask[] => {
             title: `Create config file: ${options.configFilePath}`,
             task: async () => {
                 try {
-                    const response = await axios.get<InitResponse>(
+                    const { data } = await axios.get<InitResponse>(
                         `/api/projects/init`,
                         {
                             params: {
@@ -33,15 +33,14 @@ export default (options: Options): ListrTask[] => {
                             },
                         },
                     );
-                    const translationFiles =
-                        response.data.translation_files.map(
-                            (translationFile): TranslationFile => {
-                                return {
-                                    ...translationFile,
-                                    directory: options.directory,
-                                };
-                            },
-                        );
+                    const translationFiles = data.translation_files.map(
+                        (translationFile): TranslationFile => {
+                            return {
+                                ...translationFile,
+                                directory: options.directory,
+                            };
+                        },
+                    );
 
                     const projectConfig = createProjectConfig(
                         options.projectApiKey,

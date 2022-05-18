@@ -1,9 +1,16 @@
 import inquirer from 'inquirer';
+import { mockedAxios } from '../jest.setup';
 import cli from './cli';
 import { FILENAME } from './lib/config';
+import i18natureConfigJSON from '../.i18naturerc.json';
 
 describe('cli', () => {
     it('should run init action with args', async () => {
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                translation_files: i18natureConfigJSON.translation_files,
+            },
+        });
         const logSpy = jest.spyOn(console, 'log');
 
         await cli([
@@ -31,6 +38,8 @@ describe('cli', () => {
     });
 
     it('should run init action without server response', async () => {
+        const message = 'connect ECONNREFUSED 127.0.0.1:80';
+        mockedAxios.get.mockRejectedValue(new Error(message));
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli([
@@ -43,14 +52,13 @@ describe('cli', () => {
             '--verbose',
         ]);
 
-        expect(errorSpy).toHaveBeenNthCalledWith(
-            1,
-            new Error('connect ECONNREFUSED 127.0.0.1:80'),
-        );
+        expect(errorSpy).toHaveBeenNthCalledWith(1, new Error(message));
         errorSpy.mockRestore();
     });
 
     it('should run init action with bad api_key', async () => {
+        const message = 'Exception: Not found project (bad or missing api_key)';
+        mockedAxios.get.mockRejectedValue(new Error(message));
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli([
@@ -62,14 +70,16 @@ describe('cli', () => {
             '--verbose',
         ]);
 
-        expect(errorSpy).toHaveBeenNthCalledWith(
-            1,
-            new Error('Exception: Not found project (bad or missing api_key)'),
-        );
+        expect(errorSpy).toHaveBeenNthCalledWith(1, new Error(message));
         errorSpy.mockRestore();
     });
 
     it('should run init action without args', async () => {
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                translation_files: i18natureConfigJSON.translation_files,
+            },
+        });
         const logSpy = jest.spyOn(console, 'log');
         const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({
             overwriteConfigFile: true,
@@ -96,6 +106,11 @@ describe('cli', () => {
     });
 
     it('should run download action with args', async () => {
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                content: '',
+            },
+        });
         const logSpy = jest.spyOn(console, 'log');
 
         await cli(['bin/node', 'bin/i18nature', 'download', '--verbose']);
@@ -154,7 +169,23 @@ describe('cli', () => {
         logSpy.mockRestore();
     });
 
+    it('should run download action with error', async () => {
+        const message = '';
+        mockedAxios.get.mockRejectedValue(new Error(message));
+        const errorSpy = jest.spyOn(console, 'error');
+
+        await cli(['bin/node', 'bin/i18nature', 'download', '--verbose']);
+
+        expect(errorSpy).toHaveBeenNthCalledWith(1, new Error(message));
+        errorSpy.mockRestore();
+    });
+
     it('should run upload action with args', async () => {
+        mockedAxios.post.mockResolvedValue({
+            data: {
+                translation_file_id: '1',
+            },
+        });
         const logSpy = jest.spyOn(console, 'log');
 
         await cli(['bin/node', 'bin/i18nature', 'upload', '--verbose']);
@@ -209,5 +240,16 @@ describe('cli', () => {
         );
 
         logSpy.mockRestore();
+    });
+
+    it('should run upload action with error', async () => {
+        const message = '';
+        mockedAxios.post.mockRejectedValue(new Error(message));
+        const errorSpy = jest.spyOn(console, 'error');
+
+        await cli(['bin/node', 'bin/i18nature', 'upload', '--verbose']);
+
+        expect(errorSpy).toHaveBeenNthCalledWith(1, new Error(message));
+        errorSpy.mockRestore();
     });
 });

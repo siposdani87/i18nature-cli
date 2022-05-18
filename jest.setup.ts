@@ -1,4 +1,5 @@
 import fs from 'fs';
+import axios from 'axios';
 
 // jest.setTimeout(10000);
 
@@ -7,6 +8,9 @@ let writeFileSyncSpy: jest.SpyInstance | null = null;
 let logSpy: jest.SpyInstance | null = null;
 let errorSpy: jest.SpyInstance | null = null;
 let infoSpy: jest.SpyInstance | null = null;
+
+jest.mock('axios');
+export const mockedAxios = axios as jest.Mocked<typeof axios>;
 
 beforeAll(() => {
   writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
