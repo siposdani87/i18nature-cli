@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 export const DEFAULT_API_KEY = 'API_KEY';
 
 export const FILENAME = '.i18naturerc.json';
@@ -10,3 +12,11 @@ export const BASE_URL = 'https://app.i18nature.com';
 export const GREEN_COLOR = '#0A4414';
 
 export const INDENT = 2;
+
+axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        const message = error.response?.data?.message ?? error.message;
+        return Promise.reject(new Error(message));
+    },
+);

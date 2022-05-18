@@ -26,7 +26,7 @@ export interface TranslationFile {
     default_locale: string;
     filename: string;
     extension: string;
-    wrapper_key: string;
+    wrapper_key?: string;
     directory?: string;
 }
 

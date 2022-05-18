@@ -76,6 +76,6 @@ export const runTasks = async (taskList: ListrTask[]): Promise<void> => {
     const tasks = new Listr(taskList);
 
     return tasks.run().catch((reason): void => {
-        console.log(reason);
+        console.error(reason);
     });
 };

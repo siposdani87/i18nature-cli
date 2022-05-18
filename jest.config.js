@@ -8,5 +8,6 @@ module.exports = {
     "src/**/*.{ts,tsx}",
     "!**/node_modules/**"
   ],
-  testResultsProcessor: 'jest-sonar-reporter'
+  testResultsProcessor: 'jest-sonar-reporter',
+  setupFilesAfterEnv: ['./jest.setup.ts'],
 };

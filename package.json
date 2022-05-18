@@ -39,7 +39,8 @@
     "webpack": "npx webpack",
     "eslint:coverage": "npm run eslint -- --format json --output-file coverage/eslint.json",
     "coverage": "npm run eslint:coverage",
-    "test": "npx jest && npm run coverage"
+    "jest": "npx jest",
+    "test": "npm run jest && npm run coverage"
   },
   "keywords": [
     "i18nature",

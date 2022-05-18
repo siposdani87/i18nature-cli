@@ -113,11 +113,11 @@ const parseArgumentsIntoOptions = async (
 
     return {
         projectApiKey: argv.project_api_key,
-        skipPrompts: argv.yes || false,
-        verbose: argv.verbose || false,
-        debug: argv.debug || false,
-        overwriteConfigFile: false,
-        overwriteTranslations: argv.overwriteTranslations || false,
+        skipPrompts: argv.yes ?? false,
+        verbose: argv.verbose ?? false,
+        debug: argv.debug ?? false,
+        overwriteConfigFile: argv.yes ?? false,
+        overwriteTranslations: argv.overwriteTranslations ?? false,
         configFileName,
         configFilePath,
         directory: '',
@@ -154,7 +154,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
         }
         questions.push({
             type: 'input',
-            name: 'project_api_key',
+            name: 'projectApiKey',
             message: 'Project API key?',
             default: projectConfig.project_api_key,
             when: (newAnswers: any) =>
@@ -165,7 +165,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
             type: 'input',
             name: 'directory',
             message: 'Relative path of translation files directory?',
-            default: 'example/locales',
+            default: 'i18n/locales',
             when: (newAnswers: any) =>
                 newAnswers.overwriteConfigFile ||
                 !options.existsProjectConfigFile,
@@ -178,7 +178,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
         projectApiKey:
             options.projectApiKey !== DEFAULT_API_KEY
                 ? options.projectApiKey
-                : answers.project_api_key,
+                : answers.projectApiKey,
         overwriteConfigFile:
             answers.overwriteConfigFile || !options.existsProjectConfigFile,
         directory: options.directory || answers.directory,
