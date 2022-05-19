@@ -37,7 +37,7 @@ export default (options: Options): ListrTask[] => {
                     },
                 );
                 writeContent(fileInfo.path, data.content);
-            } catch (error: any) {
+            } catch (error) {
                 return Promise.reject(error);
             }
         },

@@ -43,7 +43,7 @@ export default (options: Options): ListrTask[] => {
                     },
                 );
                 translationFile.id = data.translation_file_id;
-            } catch (error: any) {
+            } catch (error) {
                 return Promise.reject(error);
             }
         },
