@@ -47,7 +47,7 @@ export default (options: Options): ListrTask[] => {
                         translationFiles,
                     );
                     saveProjectConfig(options.configFilePath, projectConfig);
-                } catch (error: any) {
+                } catch (error) {
                     return Promise.reject(error);
                 }
             },
