@@ -1,6 +1,14 @@
-## 0.9.0 - TBD
+## 1.0.0 - TBD
 
 * 
+
+## 0.9.0 - 2022-06-19
+
+* Create unit tests
+* Fix some type issues
+* Improve CI workflow
+* Add Jest test environment
+
 ## 0.8.0 - 2022-05-17
 
 * Fix SonarLint issues
