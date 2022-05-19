@@ -10,4 +10,5 @@ module.exports = {
   ],
   testResultsProcessor: 'jest-sonar-reporter',
   setupFilesAfterEnv: ['./jest.setup.ts'],
+  silent: true
 };
