@@ -14,6 +14,7 @@
 * Fix SonarLint issues
 * Use Sonar to analyze project
 * Upgrade packages
+
 ## 0.7.0 - 2022-03-20
 
 * Refactor actions
