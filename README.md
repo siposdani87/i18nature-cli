@@ -72,7 +72,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 | id **            | String    | uniq identifier of translation file from i18nature |
 | name *           | String    | your translation file short description |
 | filename *       | String    | filename without extension |
-| extension *      | String    | eg.: json, yml, yaml, arb, po, xml, strings, ini, properties |
+| extension *      | String    | eg.: json, yml, yaml, toml, arb, po, xml, strings, ini, properties |
 | locales *        | String[]  | list of locales like ['en-GB', 'hu-HU'] |
 | default_locale * | String    | default locale eg.: 'en-GB' |
 | wrapper_key      | String    | first key in content of translation file eg.: %language or %locale |
