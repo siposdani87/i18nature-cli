@@ -3,7 +3,6 @@
 [![License](https://img.shields.io/npm/l/i18nature-cli.svg?style=square)](./LICENSE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=siposdani87_i18nature-cli&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=siposdani87_i18nature-cli)
 
-
 # I18Nature-CLI
 
 Command-line tool to init, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
@@ -20,7 +19,7 @@ i18nature --help
 
 ### How to install/run using `npm`
 
-#### Using `npm`:
+#### Using `npm`
 
 ```bash
 # Via npm init
@@ -31,12 +30,13 @@ npx i18nature-cli --help
 
 # Install globally
 npm install -g i18nature-cli
+
 i18nature --help
 ```
 
 ## Command line arguments
 
-```
+```bash
 Command-line tool of I18Nature localization tool.
 
 Usage: i18nature <cmd> [args]
@@ -87,7 +87,8 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 ⚠️ **WARNING**: You can use `language` (en) and `locale` (en-GB) placeholder keys in directory, filename as well.
 
 Example project strucure in this repository:
-```
+
+```text
     exammple/
       i18n/
         en/
@@ -103,7 +104,8 @@ Example project strucure in this repository:
 ```
 
 Example .i18naturerc.json for example directories
-```
+
+```json
 {
     "version": 1,
     "project_api_key": "API_KEY",
