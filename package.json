@@ -23,8 +23,7 @@
   },
   "directories": {
     "lib": "src",
-    "bin": "bin",
-    "test": "__tests__"
+    "bin": "bin"
   },
   "files": [
     "bin",
@@ -36,7 +35,7 @@
     "tsc": "npx -p typescript tsc",
     "tsc-test": "npx -p typescript tsc --noEmit",
     "clean": "rm -rf dist",
-    "lint": "npm run eslint && npm run tsc-test && npm run format",
+    "lint": "npm run format && npm run eslint && npm run tsc-test",
     "eslint": "npx eslint --ext ts src/",
     "format": "npx prettier --write 'src/**/*.ts*'",
     "webpack": "npx webpack",
@@ -54,7 +53,7 @@
     "localization",
     "internationalization"
   ],
-  "author": "Dániel Sipos <siposdani87@gmail.com>",
+  "author": "Dániel Sipos <siposdani87@gmail.com> (https://siposdani87.com)",
   "license": "ISC",
   "jestSonar": {
     "reportPath": "reports",
@@ -88,7 +87,7 @@
     "ts-loader": "^9.2.6",
     "typescript": "^4.5.5",
     "webpack": "^5.68.0",
-    "webpack-cli": "^4.9.2",
+    "webpack-cli": "^5.0.1",
     "webpack-node-externals": "^3.0.0"
   }
 }
