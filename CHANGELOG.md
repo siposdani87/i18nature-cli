@@ -1,6 +1,11 @@
-## 1.0.1 - TBD
+## 1.0.2 - TBD
 
 * 
+
+## 1.0.1 - 2023-01-10
+
+* Upgrade packages
+* Improve build process
 
 ## 1.0.0 - 2022-07-14
 
