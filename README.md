@@ -138,3 +138,11 @@ See this [repository](https://github.com/siposdani87/i18nature-cli) for a comple
 ## License
 
 [ISC](./LICENSE)
+
+## Developer
+
+[Dániel Sipos](https://siposdani87.com)
+
+## Sponsors
+
+This project is generously supported by [TrophyMap](https://trophymap.org), [I18Nature](https://i18nature.com), and several other amazing organizations.
