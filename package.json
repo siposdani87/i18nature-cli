@@ -30,12 +30,12 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "npm run clean && npm run lint",
+    "prebuild": "npm run clean && npm run format && npm run lint",
     "build": "npm run webpack",
     "tsc": "npx -p typescript tsc",
     "tsc-test": "npx -p typescript tsc --noEmit",
     "clean": "rm -rf dist",
-    "lint": "npm run format && npm run eslint && npm run tsc-test",
+    "lint": "npm run eslint && npm run tsc-test",
     "eslint": "npx eslint --ext ts src/",
     "format": "npx prettier --write 'src/**/*.ts*'",
     "webpack": "npx webpack",
