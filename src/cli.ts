@@ -112,7 +112,7 @@ const parseArgumentsIntoOptions = async (
     const configFilePath = path.join(CURRENT_WORK_DIR, configFileName);
 
     return {
-        projectApiKey: argv.project_api_key,
+        projectApiKey: argv.project_api_key as string,
         skipPrompts: argv.yes ?? false,
         verbose: argv.verbose ?? false,
         debug: argv.debug ?? false,
