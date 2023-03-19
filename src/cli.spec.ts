@@ -242,6 +242,31 @@ describe('cli', () => {
         logSpy.mockRestore();
     });
 
+    it('should run upload action with overwrite translations arg', async () => {
+        mockedAxios.post.mockResolvedValue({
+            data: {
+                translation_file_id: '1',
+            },
+        });
+        const logSpy = jest.spyOn(console, 'log');
+
+        await cli(['bin/node', 'bin/i18nature', 'upload', '--overwriteTranslations', '--verbose']);
+
+        expect(logSpy).toHaveBeenNthCalledWith(
+            1,
+            expect.stringContaining('UPLOAD'),
+        );
+
+        expect(logSpy).toHaveBeenNthCalledWith(
+            13,
+            expect.stringContaining(
+                'Upload translation file: Common [completed]',
+            ),
+        );
+
+        logSpy.mockRestore();
+    });
+
     it('should run upload action with error', async () => {
         const message = '';
         mockedAxios.post.mockRejectedValue(new Error(message));
