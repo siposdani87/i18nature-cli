@@ -5,7 +5,7 @@
 
 # I18Nature-CLI
 
-Command-line tool to init, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
+Command-line tool to initialize, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
 
 ## Usage
 
@@ -59,7 +59,7 @@ for more information, find our website at https://i18nature.com
 
 ## Creating a config file for I18Nature project
 
-When creating a config file, you may provide or generate a `api_key` of your project from [I18Nature](https://i18nature.com). With CLI you can initialize `.i18naturerc.json` config file. This file contains your list of your translation files. The translation file has many properties like (`id, name, filename, extension, locales, default_locale, wrapper_key, directory`).
+When creating a config file, you may provide or generate a `api_key` of your project from [I18Nature](https://i18nature.com). With CLI, you can initialize `.i18naturerc.json` config file. This file contains your list of your translation files. The translation file has many properties like (`id, name, filename, extension, locales, default_locale, wrapper_key, directory`).
 
 🔴 **IMPORTANT**: You can use `%language` and `%locale` placeholder keys in `filename, wrapper_key, directory` properties.
 
@@ -69,13 +69,13 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 
 | Property         | Type      | Description      |
 | ---------------- | --------- | ---------------- |
-| id **            | String    | uniq identifier of translation file from i18nature |
+| id **            | String    | unique identifier of translation file from i18nature |
 | name *           | String    | your translation file short description |
 | filename *       | String    | filename without extension |
 | extension *      | String    | eg.: json, yml, yaml, toml, arb, po, xml, strings, ini, properties |
 | locales *        | String[]  | list of locales like ['en-GB', 'hu-HU'] |
-| default_locale * | String    | default locale eg.: 'en-GB' |
-| wrapper_key      | String    | first key in content of translation file eg.: %language or %locale |
+| default_locale * | String    | default locale e.g.: 'en-GB' |
+| wrapper_key      | String    | first key in content of translation file e.g.: %language or %locale |
 | directory *      | String    | relative path to translation files |
 
 **not required for first upload, but required for other upload and download
@@ -86,7 +86,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 
 ⚠️ **WARNING**: You can use `language` (en) and `locale` (en-GB) placeholder keys in directory, filename as well.
 
-Example project strucure in this repository:
+Example project structure in this repository:
 
 ```text
     exammple/
