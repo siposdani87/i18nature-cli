@@ -1,6 +1,12 @@
-## 1.0.2 - TBD
+## 1.0.3 - TBD
 
 * 
+
+## 1.0.2 - 2023-03-19
+
+* Upgrade packages
+* Fix typos in README
+* Improve npm scripts
 
 ## 1.0.1 - 2023-01-10
 
