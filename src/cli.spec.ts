@@ -250,7 +250,13 @@ describe('cli', () => {
         });
         const logSpy = jest.spyOn(console, 'log');
 
-        await cli(['bin/node', 'bin/i18nature', 'upload', '--overwriteTranslations', '--verbose']);
+        await cli([
+            'bin/node',
+            'bin/i18nature',
+            'upload',
+            '--overwriteTranslations',
+            '--verbose',
+        ]);
 
         expect(logSpy).toHaveBeenNthCalledWith(
             1,
