@@ -30,7 +30,7 @@
     "dist"
   ],
   "scripts": {
-    "prebuild": "npm run clean && npm run format && npm run lint",
+    "prebuild": "npm run clean && npm run format && npm run lint && npm run coverage",
     "build": "npm run webpack",
     "tsc": "npx -p typescript tsc",
     "tsc-test": "npx -p typescript tsc --noEmit",
@@ -41,8 +41,7 @@
     "webpack": "npx webpack",
     "eslint:coverage": "npm run eslint -- --format json --output-file coverage/eslint.json",
     "coverage": "npm run eslint:coverage",
-    "jest": "npx jest",
-    "test": "npm run jest && npm run coverage"
+    "test": "npx jest"
   },
   "keywords": [
     "i18nature",
