@@ -4,7 +4,7 @@ import {
     missingProjectConfigFile,
 } from '../lib/projectConfig';
 import { Options } from '../lib/types';
-import { logHeader } from '../lib/log';
+import { logError, logHeader } from '../lib/log';
 import { getDownloadTasksFromTranslationFiles } from '../lib/task';
 import { writeContent } from '../lib/fileInfo';
 import { ListrTask } from 'listr';
@@ -37,7 +37,8 @@ export default (options: Options): ListrTask[] => {
                     },
                 );
                 writeContent(fileInfo.path, data.content);
-            } catch (error) {
+            } catch (error: any) {
+                logError(error.message);
                 return Promise.reject(error);
             }
         },
