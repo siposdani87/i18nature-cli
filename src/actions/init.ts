@@ -5,7 +5,7 @@ import {
     overwriteNotAllowedProjectConfigFile,
     saveProjectConfig,
 } from '../lib/projectConfig';
-import { logError, logHeader } from '../lib/log';
+import { logHeader } from '../lib/log';
 import { ListrTask } from 'listr';
 
 interface InitResponse {
@@ -48,7 +48,6 @@ export default (options: Options): ListrTask[] => {
                     );
                     saveProjectConfig(options.configFilePath, projectConfig);
                 } catch (error: any) {
-                    logError(error.message);
                     return Promise.reject(error);
                 }
             },
