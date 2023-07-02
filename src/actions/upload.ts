@@ -5,7 +5,7 @@ import {
     saveProjectConfig,
 } from '../lib/projectConfig';
 import { Options } from '../lib/types';
-import { logHeader } from '../lib/log';
+import { logError, logHeader } from '../lib/log';
 import { getUploadTasksFromTranslationFiles } from '../lib/task';
 import { readContent } from '../lib/fileInfo';
 import { ListrTask } from 'listr';
@@ -43,7 +43,8 @@ export default (options: Options): ListrTask[] => {
                     },
                 );
                 translationFile.id = data.translation_file_id;
-            } catch (error) {
+            } catch (error: any) {
+                logError(error.message);
                 return Promise.reject(error);
             }
         },
