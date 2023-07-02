@@ -78,7 +78,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 | wrapper_key      | String    | first key in content of translation file e.g.: %language or %locale |
 | directory *      | String    | relative path to translation files |
 
-**not required for first upload, but required for other upload and download
+**not required for first upload, but required for upload and download actions
 
 *required properties
 
