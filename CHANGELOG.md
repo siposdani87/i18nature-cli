@@ -1,6 +1,12 @@
-## 1.0.3 - TBD
+## 1.0.4 - TBD
 
 * 
+
+## 1.0.3 - 2023-07-02
+
+* Upgrade packages
+* Fix typo issues
+* Improve test script
 
 ## 1.0.2 - 2023-03-19
 
