@@ -1,9 +1,9 @@
+# I18Nature-CLI
+
 [![Version](https://img.shields.io/npm/v/i18nature-cli.svg?style=square)](https://www.npmjs.com/package/i18nature-cli)
 [![Download](https://img.shields.io/npm/dt/i18nature-cli.svg?style=square)](https://www.npmjs.com/package/i18nature-cli)
 [![License](https://img.shields.io/npm/l/i18nature-cli.svg?style=square)](./LICENSE)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=siposdani87_i18nature-cli&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=siposdani87_i18nature-cli)
-
-# I18Nature-CLI
 
 Command-line tool to initialize, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
 
@@ -71,7 +71,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 | ---------------- | --------- | ---------------- |
 | id **            | String    | unique identifier of translation file from i18nature |
 | name *           | String    | your translation file short description |
-| filename *       | String    | filename without extension |
+| filename *       | String    | name of the file |
 | extension *      | String    | eg.: json, yml, yaml, toml, arb, po, xml, strings, ini, properties |
 | locales *        | String[]  | list of locales like ['en-GB', 'hu-HU'] |
 | default_locale * | String    | default locale e.g.: 'en-GB' |
