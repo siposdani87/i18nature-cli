@@ -1,5 +1,5 @@
 import axios from 'axios';
-import fs from 'fs';
+import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import path from 'path';
 import yargs from 'yargs';

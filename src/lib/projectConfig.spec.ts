@@ -6,7 +6,7 @@ import {
     saveProjectConfig,
 } from './projectConfig';
 import { TranslationFile } from './types';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { DEBUG_FILENAME, INDENT } from './config';
 
 describe('projectConfig', () => {
