@@ -1,6 +1,13 @@
-## 1.0.4 - TBD
+# CHANGELOG
+
+## 1.0.5 - TBD
 
 * 
+
+## 1.0.4 - 2024-07-19
+
+* Use fs-extra to write file
+* Fix doc format
 
 ## 1.0.3 - 2023-07-02
 
