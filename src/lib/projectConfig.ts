@@ -1,7 +1,7 @@
-import fs from 'fs';
 import { ListrTask } from 'listr';
 import { INDENT } from './config';
 import { Options, ProjectConfig, TranslationFile } from './types';
+import { readContent, writeContent } from './fileInfo';
 
 export const createProjectConfig = (
     projectApiKey: string,
@@ -16,7 +16,7 @@ export const createProjectConfig = (
 };
 
 export const getProjectConfig = (configFilePath: string): ProjectConfig => {
-    const data = fs.readFileSync(configFilePath, 'utf8');
+    const data = readContent(configFilePath);
 
     return JSON.parse(data) as ProjectConfig;
 };
@@ -25,7 +25,7 @@ export const saveProjectConfig = (
     configFilePath: string,
     projectConfig: ProjectConfig,
 ): void => {
-    return fs.writeFileSync(
+    return writeContent(
         configFilePath,
         JSON.stringify(projectConfig, null, INDENT),
     );

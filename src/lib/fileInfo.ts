@@ -1,6 +1,6 @@
 import glob from 'glob';
 import path from 'path';
-import fs from 'fs';
+import fs from 'fs-extra';
 import { CURRENT_WORK_DIR } from './config';
 import { FileInfo, TranslationFile } from './types';
 
@@ -80,5 +80,7 @@ export const readContent = (filePath: string): string => {
 };
 
 export const writeContent = (filePath: string, content: string): void => {
+    fs.ensureFileSync(filePath);
+
     return fs.writeFileSync(filePath, content);
 };

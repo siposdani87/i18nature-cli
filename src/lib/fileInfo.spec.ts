@@ -5,7 +5,7 @@ import {
     writeContent,
 } from './fileInfo';
 import { TranslationFile } from './types';
-import fs from 'fs';
+import fs from 'fs-extra';
 import i18natureConfigJSON from '../../.i18naturerc.json';
 
 describe('fileInfo', () => {
