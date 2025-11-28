@@ -11,6 +11,7 @@
 * Updated Jest from 28.1.3 to 29.7.0
 * Updated ts-jest from 28.0.8 to 29.2.5
 * Updated Prettier from 2.8.8 to 3.7.1
+* Updated @typescript-eslint packages from 5.62.0 to 6.21.0
 * Updated all @types packages to latest versions
 * Standardized Node version to 20 in CI/CD workflows
 * Updated GitHub Actions to v4 (checkout, setup-node)
