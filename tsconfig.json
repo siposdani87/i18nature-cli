@@ -4,9 +4,9 @@
         "rootDir": "src",
         "baseUrl": ".",
         "module": "CommonJS",
-        "target": "ES5",
+        "target": "ES2021",
         "lib": [
-            "ESNext",
+            "ES2021",
         ],
         "moduleResolution": "Node",
         "sourceMap": true,

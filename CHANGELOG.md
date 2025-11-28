@@ -2,7 +2,35 @@
 
 ## 1.0.5 - TBD
 
-* 
+### Changed
+
+* Updated minimum Node.js version from 14.18.0 to 18.0.0
+* Updated axios from 0.27.x to 1.13.x for security patches
+* Updated TypeScript compilation target from ES5 to ES2021
+* Updated all dependencies to latest compatible versions
+* Standardized Node version to 20 in CI/CD workflows
+* Updated GitHub Actions to v4 (checkout, setup-node)
+* Enhanced Jest coverage configuration with thresholds (70% for all metrics)
+* Fixed coverage script to report Jest test coverage instead of eslint only
+
+### Fixed
+
+* Fixed bin/i18nature entry point to properly load webpack CommonJS output
+
+### Added
+
+* Added `.i18naturerc.json.example` template file for easier project setup
+* Added `.nvmrc` file specifying Node version 20
+* Added security audit step to CI pipeline
+* Added test coverage reporters (text, html, lcovonly)
+* Added security warning in README about .gitignore configuration
+* Added CONTRIBUTING.md for contributors
+
+### Security
+
+* Fixed all npm audit vulnerabilities
+* Added npm audit check to CI pipeline
+* Added security guidance for API key protection in README
 
 ## 1.0.4 - 2024-07-19
 
