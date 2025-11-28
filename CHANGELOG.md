@@ -6,8 +6,12 @@
 
 * Updated minimum Node.js version from 14.18.0 to 18.0.0
 * Updated axios from 0.27.x to 1.13.x for security patches
+* Updated TypeScript from 4.9.5 to 5.9.3
 * Updated TypeScript compilation target from ES5 to ES2021
-* Updated all dependencies to latest compatible versions
+* Updated Jest from 28.1.3 to 29.7.0
+* Updated ts-jest from 28.0.8 to 29.2.5
+* Updated Prettier from 2.8.8 to 3.7.1
+* Updated all @types packages to latest versions
 * Standardized Node version to 20 in CI/CD workflows
 * Updated GitHub Actions to v4 (checkout, setup-node)
 * Enhanced Jest coverage configuration with thresholds (70% for all metrics)
@@ -23,6 +27,7 @@
 
 * Added `.i18naturerc.json.example` template file for easier project setup
 * Added `.nvmrc` file specifying Node version 20
+* Added `DEPENDENCY_NOTES.md` explaining version constraints
 * Added security audit step to CI pipeline
 * Added test coverage reporters (text, html, lcovonly)
 * Added security warning in README about .gitignore configuration
