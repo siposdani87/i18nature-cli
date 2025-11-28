@@ -12,6 +12,8 @@
 * Updated GitHub Actions to v4 (checkout, setup-node)
 * Enhanced Jest coverage configuration with thresholds (70% for all metrics)
 * Fixed coverage script to report Jest test coverage instead of eslint only
+* Removed deprecated `always-auth` from .npmrc
+* Removed obsolete `suppressImplicitAnyIndexErrors` from tsconfig.json
 
 ### Fixed
 

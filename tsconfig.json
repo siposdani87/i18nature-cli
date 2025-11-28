@@ -13,7 +13,6 @@
         "declaration": true,
         "strict": true,
         "forceConsistentCasingInFileNames": true,
-        "suppressImplicitAnyIndexErrors": true,
         "skipLibCheck": true,
         "resolveJsonModule": true,
         "esModuleInterop": true,
