@@ -8,10 +8,12 @@
 * Updated axios from 0.27.x to 1.13.x for security patches
 * Updated TypeScript from 4.9.5 to 5.9.3
 * Updated TypeScript compilation target from ES5 to ES2021
-* Updated Jest from 28.1.3 to 29.7.0
+* Updated Jest from 28.1.3 to 30.2.0
 * Updated ts-jest from 28.0.8 to 29.2.5
 * Updated Prettier from 2.8.8 to 3.7.1
 * Updated @typescript-eslint packages from 5.62.0 to 6.21.0
+* Updated eslint-config-prettier from 8.10.2 to 10.1.8
+* Updated webpack-cli from 5.1.4 to 6.0.1
 * Updated all @types packages to latest versions
 * Standardized Node version to 20 in CI/CD workflows
 * Updated GitHub Actions to v4 (checkout, setup-node)

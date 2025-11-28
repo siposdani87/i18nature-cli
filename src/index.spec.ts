@@ -6,6 +6,6 @@ describe('index', () => {
 
         await cli([]);
 
-        expect(logSpy).not.toBeCalled();
+        expect(logSpy).not.toHaveBeenCalled();
     });
 });
