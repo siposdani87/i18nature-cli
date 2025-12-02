@@ -283,4 +283,43 @@ describe('cli', () => {
         expect(errorSpy).toHaveBeenNthCalledWith(1, new Error(message));
         errorSpy.mockRestore();
     });
+
+    it('should run init action and trigger overwriteConfigFile prompt condition', async () => {
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                translation_files: i18natureConfigJSON.translation_files,
+            },
+        });
+        const logSpy = jest.spyOn(console, 'log');
+        const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({
+            overwriteConfigFile: false,
+            projectApiKey: 'NEW_API_KEY',
+            directory: 'example/locales',
+        });
+
+        await cli(['bin/node', 'bin/i18nature', 'init']);
+
+        expect(promptSpy).toHaveBeenCalled();
+        logSpy.mockRestore();
+        promptSpy.mockRestore();
+    });
+
+    it('should run init action with existing config but default API key', async () => {
+        mockedAxios.get.mockResolvedValue({
+            data: {
+                translation_files: i18natureConfigJSON.translation_files,
+            },
+        });
+        const logSpy = jest.spyOn(console, 'log');
+        const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({
+            projectApiKey: 'API_KEY_FROM_PROMPT',
+        });
+
+        await cli(['bin/node', 'bin/i18nature', 'init', 'API_KEY']);
+
+        expect(promptSpy).toHaveBeenCalled();
+        expect(logSpy).toHaveBeenCalled();
+        logSpy.mockRestore();
+        promptSpy.mockRestore();
+    });
 });
