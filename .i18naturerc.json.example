@@ -1,0 +1,16 @@
+{
+    "version": 1,
+    "project_api_key": "YOUR_PROJECT_API_KEY_HERE",
+    "translation_files": [
+        {
+            "id": "",
+            "name": "Example Translation File",
+            "filename": "translations_%locale",
+            "extension": "json",
+            "wrapper_key": "",
+            "locales": ["en-GB", "es-ES"],
+            "default_locale": "en-GB",
+            "directory": "locales"
+        }
+    ]
+}

@@ -2,8 +2,5 @@
 
 'use strict';
 
-// eslint-disable-next-line
-require = require('esm')(module/*, options*/);
-
-const cli = require('../dist').default;
+const { default: cli } = require('../dist/index.js');
 cli(process.argv);
