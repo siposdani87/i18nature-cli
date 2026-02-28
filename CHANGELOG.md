@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 1.0.5 - TBD
+## 1.1.0 - 2025-02-28
 
 ### Changed
 
@@ -30,7 +30,6 @@
 
 * Added `.i18naturerc.json.example` template file for easier project setup
 * Added `.nvmrc` file specifying Node version 20
-* Added `DEPENDENCY_NOTES.md` explaining version constraints
 * Added security audit step to CI pipeline
 * Added test coverage reporters (text, html, lcovonly)
 * Added security warning in README about .gitignore configuration
