@@ -7,55 +7,52 @@
 
 Command-line tool to initialize, upload and download translation files to I18Nature localization platform ([https://i18nature.com](https://i18nature.com)).
 
-## Usage
+## Installation
 
-There is a variety of ways to use/install. The quickest way is:
-
-```bash
-npm install -g i18nature-cli
-
-i18nature --help
-```
-
-### How to install/run using `npm`
-
-#### Using `npm`
+> **Requires Node.js >= 18.0.0**
 
 ```bash
-# Via npm init
-npm init i18nature-cli --help
-
-# Via npx
-npx i18nature-cli --help
-
 # Install globally
 npm install -g i18nature-cli
 
-i18nature --help
+# Or run directly via npx
+npx i18nature-cli --help
+
+# Or via npm init
+npm init i18nature-cli --help
 ```
 
-## Command line arguments
+## Quick Start
 
 ```bash
-Command-line tool of I18Nature localization tool.
+# 1. Initialize your project config
+i18nature init <YOUR_API_KEY>
 
-Usage: i18nature <cmd> [args]
+# 2. Upload translation files
+i18nature upload
 
-Commands:
-  i18nature init [project_api_key]  Create .i18naturerc.json file.
-  i18nature upload                  Upload translation files.
-  i18nature download                Download translation files.
-
-Options:
-  -h, --help                   Show help                               [boolean]
-      --version                Show version number                     [boolean]
-  -v, --verbose                Run with verbose logging                [boolean]
-  -y, --yes                    Skip prompts                            [boolean]
-      --debug                  Debug mode                              [boolean]
-      --overwriteTranslations  Overwrite translation files on upload   [boolean]
-
-for more information, find our website at https://i18nature.com
+# 3. Download translation files
+i18nature download
 ```
+
+## Commands
+
+| Command                          | Description                        |
+| -------------------------------- | ---------------------------------- |
+| `i18nature init [project_api_key]` | Create `.i18naturerc.json` file  |
+| `i18nature upload`               | Upload translation files           |
+| `i18nature download`             | Download translation files         |
+
+## Options
+
+| Option                    | Type    | Description                            |
+| ------------------------- | ------- | -------------------------------------- |
+| `-h`, `--help`            | boolean | Show help                              |
+| `--version`               | boolean | Show version number                    |
+| `-v`, `--verbose`         | boolean | Run with verbose logging               |
+| `-y`, `--yes`             | boolean | Skip prompts                           |
+| `--debug`                 | boolean | Debug mode                             |
+| `--overwriteTranslations` | boolean | Overwrite translation files on upload  |
 
 ## Creating a config file for I18Nature project
 
@@ -70,24 +67,38 @@ When creating a config file, you may provide or generate a `api_key` of your pro
 .i18naturerc.json
 ```
 
-Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW', 'ar-LB', 'ar-LY', 'ar-MA', 'ar-OM', 'ar-QA', 'ar-SA', 'ar-SD', 'ar-SY', 'ar-TN', 'ar-AE', 'ar-YE', 'be-BY', 'bn-IN', 'bn-BD', 'bg-BG', 'ca-ES', 'zh-CN', 'zh-HK', 'zh-SG', 'zh-TW', 'hr-HR', 'cs-CZ', 'da-DK', 'nl-BE', 'nl-NL', 'en-AU', 'en-CA', 'en-IN', 'en-IE', 'en-MT', 'en-NZ', 'en-PH', 'en-SG', 'en-ZA', 'en-GB', 'en-US', 'et-EE', 'fi-FI', 'fr-BE', 'fr-CA', 'fr-FR', 'fr-LU', 'fr-CH', 'de-AT', 'de-DE', 'de-LU', 'de-CH', 'el-CY', 'el-GR', 'iw-IL', 'hi-IN', 'hu-HU', 'is-IS', 'in-ID', 'ga-IE', 'it-IT', 'it-CH', 'ja-JP', 'ko-KR', 'lv-LV', 'lt-LT', 'mk-MK', 'ms-MY', 'mt-MT', 'no-NO', 'pl-PL', 'pt-BR', 'pt-PT', 'ro-RO', 'ru-RU', 'sr-BA', 'sr-ME', 'sr-CS', 'sr-RS', 'sk-SK', 'sl-SI', 'es-AR', 'es-BO', 'es-CL', 'es-CO', 'es-CR', 'es-DO', 'es-EC', 'es-SV', 'es-GT', 'es-HN', 'es-MX', 'es-NI', 'es-PA', 'es-PY', 'es-PE', 'es-PR', 'es-ES', 'es-US', 'es-UY', 'es-VE', 'sv-SE', 'th-TH', 'tr-TR', 'uk-UA', 'vi-VN']
+<details>
+<summary>Supported locales (click to expand)</summary>
+
+`sq-AL`, `ar-DZ`, `ar-BH`, `ar-EG`, `ar-IQ`, `ar-JO`, `ar-KW`, `ar-LB`, `ar-LY`, `ar-MA`,
+`ar-OM`, `ar-QA`, `ar-SA`, `ar-SD`, `ar-SY`, `ar-TN`, `ar-AE`, `ar-YE`, `be-BY`, `bn-IN`,
+`bn-BD`, `bg-BG`, `ca-ES`, `zh-CN`, `zh-HK`, `zh-SG`, `zh-TW`, `hr-HR`, `cs-CZ`, `da-DK`,
+`nl-BE`, `nl-NL`, `en-AU`, `en-CA`, `en-IN`, `en-IE`, `en-MT`, `en-NZ`, `en-PH`, `en-SG`,
+`en-ZA`, `en-GB`, `en-US`, `et-EE`, `fi-FI`, `fr-BE`, `fr-CA`, `fr-FR`, `fr-LU`, `fr-CH`,
+`de-AT`, `de-DE`, `de-LU`, `de-CH`, `el-CY`, `el-GR`, `iw-IL`, `hi-IN`, `hu-HU`, `is-IS`,
+`in-ID`, `ga-IE`, `it-IT`, `it-CH`, `ja-JP`, `ko-KR`, `lv-LV`, `lt-LT`, `mk-MK`, `ms-MY`,
+`mt-MT`, `no-NO`, `pl-PL`, `pt-BR`, `pt-PT`, `ro-RO`, `ru-RU`, `sr-BA`, `sr-ME`, `sr-CS`,
+`sr-RS`, `sk-SK`, `sl-SI`, `es-AR`, `es-BO`, `es-CL`, `es-CO`, `es-CR`, `es-DO`, `es-EC`,
+`es-SV`, `es-GT`, `es-HN`, `es-MX`, `es-NI`, `es-PA`, `es-PY`, `es-PE`, `es-PR`, `es-ES`,
+`es-US`, `es-UY`, `es-VE`, `sv-SE`, `th-TH`, `tr-TR`, `uk-UA`, `vi-VN`
+
+</details>
 
 ### Translation file properties
 
 | Property         | Type      | Description      |
 | ---------------- | --------- | ---------------- |
-| id **            | String    | unique identifier of translation file from i18nature |
-| name *           | String    | your translation file short description |
-| filename *       | String    | name of the file |
-| extension *      | String    | eg.: json, yml, yaml, toml, arb, po, xml, strings, ini, properties |
-| locales *        | String[]  | list of locales like ['en-GB', 'hu-HU'] |
-| default_locale * | String    | default locale e.g.: 'en-GB' |
+| id <sup>2</sup>            | String    | unique identifier of translation file from i18nature |
+| name <sup>1</sup>          | String    | your translation file short description |
+| filename <sup>1</sup>      | String    | name of the file |
+| extension <sup>1</sup>     | String    | eg.: json, yml, yaml, toml, arb, po, xml, strings, ini, properties |
+| locales <sup>1</sup>       | String[]  | list of locales like ['en-GB', 'hu-HU'] |
+| default_locale <sup>1</sup> | String   | default locale e.g.: 'en-GB' |
 | wrapper_key      | String    | first key in content of translation file e.g.: %language or %locale |
-| directory *      | String    | relative path to translation files |
+| directory <sup>1</sup>     | String    | relative path to translation files |
 
-**not required for first upload, but required for upload and download actions
-
-*required properties
+<sup>1</sup> Required property<br>
+<sup>2</sup> Not required for first upload, but required for subsequent upload and download actions
 
 ### Locale directory hierarchy
 
@@ -96,7 +107,7 @@ Supported locales: ['sq-AL', 'ar-DZ', 'ar-BH', 'ar-EG', 'ar-IQ', 'ar-JO', 'ar-KW
 Example project structure in this repository:
 
 ```text
-    exammple/
+    example/
       i18n/
         en/
           common.json
@@ -138,9 +149,7 @@ Example .i18naturerc.json for example directories
 }
 ```
 
-Create config file will copy the content to your project directory, and modify the `.i18naturerc.json` in the root folder.
-
-See this [repository](https://github.com/siposdani87/i18nature-cli) for a complete example.
+See the [example/](./example) directory for a complete example.
 
 ## License
 
