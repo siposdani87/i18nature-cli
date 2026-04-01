@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { get } from '../lib/fetch';
 import { Options, TranslationFile } from '../lib/types';
 import {
     createProjectConfig,
@@ -25,7 +25,7 @@ export default (options: Options): ListrTask[] => {
             title: `Create config file: ${options.configFilePath}`,
             task: async () => {
                 try {
-                    const { data } = await axios.get<InitResponse>(
+                    const data = await get<InitResponse>(
                         `/api/projects/init`,
                         {
                             params: {

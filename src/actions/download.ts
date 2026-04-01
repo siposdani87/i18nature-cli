@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { get } from '../lib/fetch';
 import {
     getProjectConfig,
     missingProjectConfigFile,
@@ -25,7 +25,7 @@ export default (options: Options): ListrTask[] => {
         projectConfig.translation_files,
         async (translationFile, fileInfo): Promise<void> => {
             try {
-                const { data } = await axios.get<DownloadResponse>(
+                const data = await get<DownloadResponse>(
                     `/api/translation-files/${
                         translationFile.id ?? null
                     }/download`,

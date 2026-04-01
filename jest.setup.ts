@@ -1,5 +1,4 @@
 import fs from 'fs-extra';
-import axios from 'axios';
 
 // jest.setTimeout(10000);
 
@@ -10,8 +9,8 @@ let logSpy: jest.SpyInstance | null = null;
 let errorSpy: jest.SpyInstance | null = null;
 let infoSpy: jest.SpyInstance | null = null;
 
-jest.mock('axios');
-export const mockedAxios = axios as jest.Mocked<typeof axios>;
+export const mockedFetch = jest.fn();
+global.fetch = mockedFetch;
 
 beforeAll(() => {
   writeFileSyncSpy = jest.spyOn(fs, 'writeFileSync').mockImplementation(() => {
@@ -40,7 +39,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
-  // Empty method
+  mockedFetch.mockReset();
 });
 
 afterAll(() => {
@@ -51,3 +50,14 @@ afterAll(() => {
   errorSpy?.mockRestore();
   infoSpy?.mockRestore();
 });
+
+export function mockFetchResponse(data: any): void {
+  mockedFetch.mockResolvedValue({
+    ok: true,
+    json: async () => data,
+  });
+}
+
+export function mockFetchError(message: string): void {
+  mockedFetch.mockRejectedValue(new Error(message));
+}

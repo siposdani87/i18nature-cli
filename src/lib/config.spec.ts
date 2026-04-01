@@ -8,7 +8,6 @@ import {
     GREEN_COLOR,
     INDENT,
 } from './config';
-import axios from 'axios';
 
 describe('config', () => {
     it('should export DEFAULT_API_KEY constant', () => {
@@ -42,11 +41,5 @@ describe('config', () => {
 
     it('should export INDENT constant', () => {
         expect(INDENT).toBe(2);
-    });
-
-    it('should have axios interceptor configured', () => {
-        expect(axios.interceptors.response).toBeDefined();
-        // The interceptor is set up when config module is imported
-        // It's tested indirectly through error handling in other tests
     });
 });

@@ -1,15 +1,13 @@
 import inquirer from 'inquirer';
-import { mockedAxios } from '../jest.setup';
+import { mockFetchResponse, mockFetchError } from '../jest.setup';
 import cli from './cli';
 import { FILENAME } from './lib/config';
 import i18natureConfigJSON from '../.i18naturerc.json';
 
 describe('cli', () => {
     it('should run init action with args', async () => {
-        mockedAxios.get.mockResolvedValue({
-            data: {
-                translation_files: i18natureConfigJSON.translation_files,
-            },
+        mockFetchResponse({
+            translation_files: i18natureConfigJSON.translation_files,
         });
         const logSpy = jest.spyOn(console, 'log');
 
@@ -39,7 +37,7 @@ describe('cli', () => {
 
     it('should run init action without server response', async () => {
         const message = 'connect ECONNREFUSED 127.0.0.1:80';
-        mockedAxios.get.mockRejectedValue(new Error(message));
+        mockFetchError(message);
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli([
@@ -58,7 +56,7 @@ describe('cli', () => {
 
     it('should run init action with bad api_key', async () => {
         const message = 'Exception: Not found project (bad or missing api_key)';
-        mockedAxios.get.mockRejectedValue(new Error(message));
+        mockFetchError(message);
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli([
@@ -75,10 +73,8 @@ describe('cli', () => {
     });
 
     it('should run init action without args', async () => {
-        mockedAxios.get.mockResolvedValue({
-            data: {
-                translation_files: i18natureConfigJSON.translation_files,
-            },
+        mockFetchResponse({
+            translation_files: i18natureConfigJSON.translation_files,
         });
         const logSpy = jest.spyOn(console, 'log');
         const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({
@@ -106,10 +102,8 @@ describe('cli', () => {
     });
 
     it('should run download action with args', async () => {
-        mockedAxios.get.mockResolvedValue({
-            data: {
-                content: '',
-            },
+        mockFetchResponse({
+            content: '',
         });
         const logSpy = jest.spyOn(console, 'log');
 
@@ -171,7 +165,7 @@ describe('cli', () => {
 
     it('should run download action with error', async () => {
         const message = '';
-        mockedAxios.get.mockRejectedValue(new Error(message));
+        mockFetchError(message);
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli(['bin/node', 'bin/i18nature', 'download', '--verbose']);
@@ -181,10 +175,8 @@ describe('cli', () => {
     });
 
     it('should run upload action with args', async () => {
-        mockedAxios.post.mockResolvedValue({
-            data: {
-                translation_file_id: '1',
-            },
+        mockFetchResponse({
+            translation_file_id: '1',
         });
         const logSpy = jest.spyOn(console, 'log');
 
@@ -243,10 +235,8 @@ describe('cli', () => {
     });
 
     it('should run upload action with overwrite translations arg', async () => {
-        mockedAxios.post.mockResolvedValue({
-            data: {
-                translation_file_id: '1',
-            },
+        mockFetchResponse({
+            translation_file_id: '1',
         });
         const logSpy = jest.spyOn(console, 'log');
 
@@ -275,7 +265,7 @@ describe('cli', () => {
 
     it('should run upload action with error', async () => {
         const message = '';
-        mockedAxios.post.mockRejectedValue(new Error(message));
+        mockFetchError(message);
         const errorSpy = jest.spyOn(console, 'error');
 
         await cli(['bin/node', 'bin/i18nature', 'upload', '--verbose']);
@@ -285,10 +275,8 @@ describe('cli', () => {
     });
 
     it('should run init action and trigger overwriteConfigFile prompt condition', async () => {
-        mockedAxios.get.mockResolvedValue({
-            data: {
-                translation_files: i18natureConfigJSON.translation_files,
-            },
+        mockFetchResponse({
+            translation_files: i18natureConfigJSON.translation_files,
         });
         const logSpy = jest.spyOn(console, 'log');
         const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({
@@ -305,10 +293,8 @@ describe('cli', () => {
     });
 
     it('should run init action with existing config but default API key', async () => {
-        mockedAxios.get.mockResolvedValue({
-            data: {
-                translation_files: i18natureConfigJSON.translation_files,
-            },
+        mockFetchResponse({
+            translation_files: i18natureConfigJSON.translation_files,
         });
         const logSpy = jest.spyOn(console, 'log');
         const promptSpy = jest.spyOn(inquirer, 'prompt').mockResolvedValue({

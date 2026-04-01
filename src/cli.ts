@@ -1,4 +1,3 @@
-import axios from 'axios';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import path from 'path';
@@ -12,6 +11,7 @@ import {
     DEFAULT_API_KEY,
     FILENAME,
 } from './lib/config';
+import { setBaseUrl } from './lib/fetch';
 import { Action, Options } from './lib/types';
 import { init, upload, download } from './actions';
 import { runTasks } from './lib/task';
@@ -186,7 +186,7 @@ const promptForMissingOptions = async (options: Options): Promise<Options> => {
 };
 
 const actionHandler = (options: Options): ListrTask[] => {
-    axios.defaults.baseURL = options.debug ? DEBUG_BASE_URL : BASE_URL;
+    setBaseUrl(options.debug ? DEBUG_BASE_URL : BASE_URL);
 
     switch (options.action) {
         case Action.INIT:

@@ -61,7 +61,6 @@
     "indent": 4
   },
   "dependencies": {
-    "axios": "^1.13.2",
     "chalk": "^4.1.2",
     "esm": "^3.2.25",
     "fs-extra": "^11.3.2",
