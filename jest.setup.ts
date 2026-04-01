@@ -1,9 +1,9 @@
-import fs from 'fs-extra';
+import fs from 'node:fs';
 
 // jest.setTimeout(10000);
 
 let writeFileSyncSpy: jest.SpyInstance | null = null;
-let ensureFileSyncSpy: jest.SpyInstance | null = null;
+let mkdirSyncSpy: jest.SpyInstance | null = null;
 
 let logSpy: jest.SpyInstance | null = null;
 let errorSpy: jest.SpyInstance | null = null;
@@ -17,8 +17,8 @@ beforeAll(() => {
     // Empty method
   });
 
-  ensureFileSyncSpy = jest.spyOn(fs, 'ensureFileSync').mockImplementation(() => {
-    // Empty method
+  mkdirSyncSpy = jest.spyOn(fs, 'mkdirSync').mockImplementation(() => {
+    return '';
   });
 
   logSpy = jest.spyOn(console, 'log').mockImplementation(() => {
@@ -44,7 +44,7 @@ afterEach(() => {
 
 afterAll(() => {
   writeFileSyncSpy?.mockRestore();
-  ensureFileSyncSpy?.mockRestore();
+  mkdirSyncSpy?.mockRestore();
 
   logSpy?.mockRestore();
   errorSpy?.mockRestore();

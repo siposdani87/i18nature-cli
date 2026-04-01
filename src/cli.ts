@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import fs from 'node:fs';
 import inquirer from 'inquirer';
 import path from 'path';
 import yargs from 'yargs';

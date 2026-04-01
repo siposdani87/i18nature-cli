@@ -5,8 +5,7 @@ import {
     writeContent,
 } from './fileInfo';
 import { TranslationFile } from './types';
-import fs from 'fs-extra';
-import glob from 'glob';
+import fs from 'node:fs';
 import i18natureConfigJSON from '../../.i18naturerc.json';
 
 describe('fileInfo', () => {
@@ -70,7 +69,7 @@ describe('fileInfo', () => {
     it('should filter out non-matching locales in upload file infos', () => {
         const workDir = process.cwd();
         const globSyncSpy = jest
-            .spyOn(glob, 'sync')
+            .spyOn(fs, 'globSync')
             .mockReturnValue([
                 `${workDir}/example/locales/test_en-GB.json`,
                 `${workDir}/example/locales/test_de-DE.json`,

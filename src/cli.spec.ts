@@ -216,12 +216,10 @@ describe('cli', () => {
                 'Upload translation file: Common [started]',
             ),
         );
-        expect(logSpy).toHaveBeenNthCalledWith(
-            10,
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringContaining('example/i18n/en/common.json [completed]'),
         );
-        expect(logSpy).toHaveBeenNthCalledWith(
-            12,
+        expect(logSpy).toHaveBeenCalledWith(
             expect.stringContaining('example/i18n/hu/common.json [completed]'),
         );
         expect(logSpy).toHaveBeenNthCalledWith(

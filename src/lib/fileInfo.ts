@@ -1,6 +1,5 @@
-import glob from 'glob';
-import path from 'path';
-import fs from 'fs-extra';
+import fs from 'node:fs';
+import path from 'node:path';
 import { CURRENT_WORK_DIR } from './config';
 import { FileInfo, TranslationFile } from './types';
 
@@ -38,7 +37,7 @@ export const getUploadFileInfosOfTranslationFile = (
     translationFile: TranslationFile,
 ): FileInfo[] => {
     const [filePattern, globPattern] = _getGlobPatterns(translationFile);
-    const files = glob.sync(globPattern);
+    const files = fs.globSync(globPattern);
     const fileInfos: FileInfo[] = [];
 
     files.forEach((filePath): void => {
@@ -80,7 +79,8 @@ export const readContent = (filePath: string): string => {
 };
 
 export const writeContent = (filePath: string, content: string): void => {
-    fs.ensureFileSync(filePath);
+    const dir = path.dirname(filePath);
+    fs.mkdirSync(dir, { recursive: true });
 
     return fs.writeFileSync(filePath, content);
 };
