@@ -38,8 +38,8 @@ npm run coverage          # Jest coverage + ESLint coverage report
 4. `runTasks()` — executes the task list via Listr with progress display
 
 **Three layers:**
-- **`src/actions/`** — Command handlers (`init.ts`, `upload.ts`, `download.ts`). Each returns `ListrTask[]` with nested subtasks. They call the I18Nature API via axios and use lib utilities.
-- **`src/lib/`** — Shared utilities: `config.ts` (constants, axios interceptor), `types.ts` (interfaces/enums), `projectConfig.ts` (read/write `.i18naturerc.json`), `fileInfo.ts` (glob-based file discovery, `%language`/`%locale` path placeholders), `task.ts` (Listr task builders), `log.ts` (chalk-colored logging).
+- **`src/actions/`** — Command handlers (`init.ts`, `upload.ts`, `download.ts`). Each returns `ListrTask[]` with nested subtasks. They call the I18Nature API via native fetch (wrapper in `src/lib/fetch.ts`) and use lib utilities.
+- **`src/lib/`** — Shared utilities: `config.ts` (constants), `fetch.ts` (fetch wrapper with base URL and error handling), `types.ts` (interfaces/enums), `projectConfig.ts` (read/write `.i18naturerc.json`), `fileInfo.ts` (`fs.globSync`-based file discovery, `%language`/`%locale` path placeholders), `task.ts` (Listr task builders), `log.ts` (chalk-colored logging).
 - **`src/cli.ts`** — CLI argument parsing and orchestration (the glue).
 
 **Key types** (`src/lib/types.ts`): `Action` enum, `Options`, `TranslationFile`, `ProjectConfig`, `FileInfo`.
@@ -48,7 +48,7 @@ npm run coverage          # Jest coverage + ESLint coverage report
 
 - Jest 30 with ts-jest, test environment: node
 - Tests are colocated with source as `*.spec.ts` files in the same directory
-- `jest.setup.ts` globally mocks axios, `fs.writeFileSync`, `fs.ensureFileSync`, and console methods. Import `mockedAxios` from `jest.setup` for axios mocking in tests.
+- `jest.setup.ts` globally mocks `global.fetch`, `fs.writeFileSync`, `fs.mkdirSync`, and console methods. Import `mockFetchResponse`/`mockFetchError` from `jest.setup` for fetch mocking in tests.
 - Coverage threshold: 70% minimum (branches, functions, lines, statements)
 - Webpack bundles to `dist/index.js` (CommonJS, node target, externals excluded)
 
@@ -56,5 +56,7 @@ npm run coverage          # Jest coverage + ESLint coverage report
 
 - `master` is the main/release branch (triggers npm publish via CI)
 - `develop` is the development branch
-- CI runs on push to master/develop and on pull requests (Node 20, ubuntu-latest)
+- CI runs on push to master/develop and on pull requests (Node 22, ubuntu-latest)
+- **Conventional Commits** enforced via commitlint + husky (`feat:`, `fix:`, `docs:`, `chore:`, etc.)
+- **Pre-commit hook:** lint-staged runs prettier + eslint on staged `.ts` files
 - `.i18naturerc.json` contains API keys — must be in `.gitignore`
